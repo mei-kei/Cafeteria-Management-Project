@@ -4,8 +4,6 @@
                   Maryam Alsaif - 202101179
                   Munira Altheeb - 202200822
  */
-
-
 import java.util.Scanner;
 
 class Food{
@@ -153,55 +151,53 @@ public class cafeCatalog {
                     System.out.println("b. Check the number of food varieties");
                     System.out.println("c. Get food information");
                     System.out.println("d. Complain");
-                    break;
-
+                
                     String user = input.next();
-
-                    switch(user){
+                
+                    switch(user) {
                         case "a":
-                        System.out.println("\nEnter the title of the food to search: ");
-                        String title = input.next();
-                        //user.searchFood(title, foodList);
-                        break;
-                        
+                            System.out.println("\nEnter the title of the food to search: ");
+                            String title = input.next();
+                            //user.searchFood(title, foodList);
+                            break;
+                                    
                         case "b":
-                        System.out.println("\nEnter food title: ");
-                        String foodTitle = input.next();
-                        System.out.println("Enter country of origin: ");
-                        String country = input.next();
-                        System.out.println("Enter additional info: ");
-                        String info = input.next();
-                        //user.searchFood(title, country, info);
-                        break;
-
+                            System.out.println("\nEnter food title: ");
+                            String foodTitle = input.next();
+                            System.out.println("Enter country of origin: ");
+                            String country = input.next();
+                            System.out.println("Enter additional info: ");
+                            String info = input.next();
+                            //user.searchFood(title, country, info);
+                            break;
+                
                         case "c":
-                        System.out.println("Enter food title to complain about: ");
-                        String complaint = input.next();
-                        //userMenu.complain(complaint);
-                        break;
-
+                            System.out.println("Enter food title to complain about: ");
+                            String complaint = input.next();
+                            //userMenu.complain(complaint);
+                            break;
+                
                         case "d":
-                        break;
-                        
+                            break;
+                                        
                         default:
-                        System.out.println("Invalid choice.");
+                            System.out.println("Invalid choice.");
+                            break;
+                    }
+                    if(user.equals("d")) {
                         break;
                     }
-
-                    if(user.equals("d")){
-                        break;
-                    }
-
-                    case 3:
+                    break; // Move the break statement here
+                
+                case 3:
                     System.out.println("Exiting menu...");
                     System.exit(0);
-
-                    default:
+                    break;
+                
+                default:
                     System.out.println("Invalid choice.");
                     break;
-
                 }
-                break;
             }
         }
     }
