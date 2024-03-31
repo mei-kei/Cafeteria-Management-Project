@@ -98,107 +98,108 @@ public class cafeCatalog {
             admin adminMenu = new admin();
             //user userMenu = new user();
 
-            while(true){
+            while (true) {
                 System.out.println("Please select the user: ");
                 System.out.println("1. Administrator");
                 System.out.println("2. User");
                 System.out.println("3. Exit");
-
+            
                 int choice = input.nextInt();
-
+            
                 //nested switch cases considering two types of users: admin and students
-                switch(choice){
-
+                switch (choice) {
                     //if user choice was 1. Admin
                     case 1:
-                    System.out.println("Administrator Menu:");
-                    System.out.println("a. Delete information of the food");
-                    System.out.println("b. Search food on the menu");
-                    //System.out.println("c. Check the number of food varieties");
-                    System.out.println("d. Generate the reports of the food based on:");
-                    System.out.println("\t1. Food 'title'");
-                    System.out.println("\t2. Food 'info'");
-                    System.out.println("\t3. Food 'country'");
-                    System.out.println();
-
-                    String admin = input.next();
-
-                    switch(admin){
-
-                        case "a":
-                        System.out.print("\nEnter title of the food to delete: ");
-                        String deleteTitle = input.next();
-                        adminMenu.deleteFood(deleteTitle);
+                        System.out.println("Administrator Menu:");
+                        System.out.println("a. Delete information of the food");
+                        System.out.println("b. Search food on the menu");
+                        //System.out.println("c. Check the number of food varieties");
+                        System.out.println("d. Generate the reports of the food based on:");
+                        System.out.println("\t1. Food 'title'");
+                        System.out.println("\t2. Food 'info'");
+                        System.out.println("\t3. Food 'country'");
+                        System.out.println();
+            
+                        String admin = input.next();
+            
+                        switch (admin) {
+            
+                            case "a":
+                                System.out.print("\nEnter title of the food to delete: ");
+                                String deleteTitle = input.next();
+                                adminMenu.deleteFood(deleteTitle);
+                                break;
+            
+                            case "b":
+                                System.out.println("\nEnter food title to search: ");
+                                String searchTitle = input.next();
+                                //foodList.searchFood(searchTitle);
+                                break;
+            
+                            case "c":
+                                System.out.println("Generate report based on:");
+                                String report = input.next();
+                                adminMenu.generateReports(report);
+                                break;
+                        }
                         break;
-
-                        case "b":
-                        System.out.println("\nEnter food title to search: ");
-                        String searchTitle = input.next();
-                        //foodList.searchFood(searchTitle);
-                        break;
-
-                        case "c":
-                        System.out.println("Generate report based on:");
-                        String report = input.next();
-                        adminMenu.generateReports(report);
-                        break;
-                    }
-
+            
                     //if user choice was 2. User
                     case 2:
-                    System.out.println("User Menu:");
-                    System.out.println("a. Search food on the menu");
-                    System.out.println("b. Check the number of food varieties");
-                    System.out.println("c. Get food information");
-                    System.out.println("d. Complain");
-                
-                    String user = input.next();
-                
-                    switch(user) {
-                        case "a":
-                            System.out.println("\nEnter the title of the food to search: ");
-                            String title = input.next();
-                            //user.searchFood(title, foodList);
+                        System.out.println("User Menu:");
+                        System.out.println("a. Search food on the menu");
+                        System.out.println("b. Check the number of food varieties");
+                        System.out.println("c. Get food information");
+                        System.out.println("d. Complain");
+            
+                        String user = input.next();
+            
+                        switch (user) {
+                            case "a":
+                                System.out.println("\nEnter the title of the food to search: ");
+                                String title = input.next();
+                                //user.searchFood(title, foodList);
+                                break;
+            
+                            case "b":
+                                System.out.println("\nEnter food title: ");
+                                String foodTitle = input.next();
+                                System.out.println("Enter country of origin: ");
+                                String country = input.next();
+                                System.out.println("Enter additional info: ");
+                                String info = input.next();
+                                //user.searchFood(title, country, info);
+                                break;
+            
+                            case "c":
+                                System.out.println("Enter food title to complain about: ");
+                                String complaint = input.next();
+                                //userMenu.complain(complaint);
+                                break;
+            
+                            case "d":
+                                break;
+            
+                            default:
+                                System.out.println("Invalid choice.");
+                                break;
+                        }
+                        if (user.equals("d")) {
                             break;
-                                    
-                        case "b":
-                            System.out.println("\nEnter food title: ");
-                            String foodTitle = input.next();
-                            System.out.println("Enter country of origin: ");
-                            String country = input.next();
-                            System.out.println("Enter additional info: ");
-                            String info = input.next();
-                            //user.searchFood(title, country, info);
-                            break;
-                
-                        case "c":
-                            System.out.println("Enter food title to complain about: ");
-                            String complaint = input.next();
-                            //userMenu.complain(complaint);
-                            break;
-                
-                        case "d":
-                            break;
-                                        
-                        default:
-                            System.out.println("Invalid choice.");
-                            break;
-                    }
-                    if(user.equals("d")) {
+                        }
                         break;
-                    }
-                    break; // Move the break statement here
-                
-                case 3:
-                    System.out.println("Exiting menu...");
-                    System.exit(0);
-                    break;
-                
-                default:
-                    System.out.println("Invalid choice.");
-                    break;
+            
+                    case 3:
+                        System.out.println("Exiting menu...");
+                        System.exit(0);
+                        break;
+            
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
                 }
             }
+            
         }
     }
 }
