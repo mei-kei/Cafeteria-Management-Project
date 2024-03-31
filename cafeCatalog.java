@@ -5,8 +5,6 @@
                   Manhah Iftikhar - 202100796
                   Maryam Alsaif - 202101179
                   Munira Altheeb - 202200822
-                  
- * Program Description:
  */
 import java.util.Scanner;
 
@@ -56,7 +54,6 @@ class admin{
             System.out.println("Food not found");
             return;
         }
-        //commit
         //making the next item on the menu as the top item after deletion of the previous one
         previous.next = current.next;
     }
@@ -96,11 +93,51 @@ class admin{
     }
 }
 
+//class user extends admin as the user class utilises certain functions from admin class
+class user extends admin{
+    Scanner input;
+
+    void inquire(Food foodList){
+        System.out.println("Enter the title of the food you want to inquire about: ");
+        String title = input.next();
+
+        /*Food found = foodList.searchFood(title); --searchFood method tobe added
+        if(found != null){
+            System.out.println("Food Title: " + found.title);
+            System.out.println("Country of Origin: " + found.countryOfOrigin);
+            System.out.println("Info: " + found.info);
+        } else{
+            System.out.println("The food that you're looking for does not exist.");
+        }*/
+    }
+
+    void request(admin adminMenu){
+        System.out.println("Enter the title of the new food: ");
+        String title = input.next();
+
+        System.out.println("Enter the country of origin: ");
+        String country = input.next();
+
+        System.out.println("Enter additional information: ");
+        String info = input.next();
+
+        //adminMenu.addFood(title, country, info); --addFood method tobe added
+        System.out.println("Request for the new food variety has been submitted successfully.");
+    }
+
+    void complaint(String title){
+        System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
+        String complaint = input.next();
+
+        System.out.println("Your complaint about " + title + " has been registered.");
+    }
+}
+
 public class cafeCatalog {
     public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
             admin adminMenu = new admin();
-            //user userMenu = new user();
+            user userMenu = new user();
 
             while (true) {
                 System.out.println("Please select the user: ");
@@ -153,8 +190,9 @@ public class cafeCatalog {
                         System.out.println("User Menu:");
                         System.out.println("a. Search food on the menu");
                         System.out.println("b. Check the number of food varieties");
-                        System.out.println("c. Get food information");
-                        System.out.println("d. Complain");
+                        System.out.println("c. Inquire/Get food information");
+                        System.out.println("d. Request for a new variety of food");
+                        System.out.println("e. Raise a complain about the non-availability of a food");
             
                         String user = input.next();
             
@@ -172,13 +210,13 @@ public class cafeCatalog {
                                 String country = input.next();
                                 System.out.println("Enter additional info: ");
                                 String info = input.next();
-                                //user.searchFood(title, country, info);
+                                //user.searchFood(title, country, info); --searchFood method tobe added
                                 break;
             
                             case "c":
                                 System.out.println("Enter food title to complain about: ");
                                 String complaint = input.next();
-                                //userMenu.complain(complaint);
+                                userMenu.complaint(complaint);
                                 break;
             
                             case "d":
@@ -203,7 +241,6 @@ public class cafeCatalog {
                         break;
                 }
             }
-            
         }
     }
 }
