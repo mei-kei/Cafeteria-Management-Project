@@ -1,8 +1,12 @@
 /*
+ * Course: Computer Science II, 201
+ * Assignment: PMU Cafeteria Facilities for Faculty and Students 
  * Student Names: Furat Al Omran - 20221054
                   Manhah Iftikhar - 202100796
                   Maryam Alsaif - 202101179
                   Munira Altheeb - 202200822
+                  
+ * Program Description:
  */
 import java.util.Scanner;
 
