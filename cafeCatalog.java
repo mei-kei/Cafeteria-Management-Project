@@ -95,42 +95,7 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
-    Scanner input;
 
-    void inquire(Food foodList){
-        System.out.println("Enter the title of the food you want to inquire about: ");
-        String title = input.next();
-
-        /*Food found = foodList.searchFood(title); --searchFood method tobe added
-        if(found != null){
-            System.out.println("Food Title: " + found.title);
-            System.out.println("Country of Origin: " + found.countryOfOrigin);
-            System.out.println("Info: " + found.info);
-        } else{
-            System.out.println("The food that you're looking for does not exist.");
-        }*/
-    }
-
-    void request(admin adminMenu){
-        System.out.println("Enter the title of the new food: ");
-        String title = input.next();
-
-        System.out.println("Enter the country of origin: ");
-        String country = input.next();
-
-        System.out.println("Enter additional information: ");
-        String info = input.next();
-
-        //adminMenu.addFood(title, country, info); --addFood method tobe added
-        System.out.println("Request for the new food variety has been submitted successfully.");
-    }
-
-    void complaint(String title){
-        System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
-        String complaint = input.next();
-
-        System.out.println("Your complaint about " + title + " has been registered.");
-    }
 }
 
 public class cafeCatalog {
@@ -156,9 +121,9 @@ public class cafeCatalog {
                         System.out.println("b. Search food on the menu");
                         //System.out.println("c. Check the number of food varieties");
                         System.out.println("d. Generate the reports of the food based on:");
-                        System.out.println("\t1. Food 'title'");
-                        System.out.println("\t2. Food 'info'");
-                        System.out.println("\t3. Food 'country'");
+                        System.out.println("\t1. Food 'Title'");
+                        System.out.println("\t2. Food 'Info'");
+                        System.out.println("\t3. Food 'Country'");
                         System.out.println();
             
                         String admin = input.next();
@@ -216,7 +181,7 @@ public class cafeCatalog {
                             case "c":
                                 System.out.println("Enter food title to complain about: ");
                                 String complaint = input.next();
-                                userMenu.complaint(complaint);
+                                //userMenu.complaint(complaint);
                                 break;
             
                             case "d":
