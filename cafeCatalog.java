@@ -52,7 +52,7 @@ class admin{
             System.out.println("Food not found");
             return;
         }
-
+        //commit
         //making the next item on the menu as the top item after deletion of the previous one
         previous.next = current.next;
     }
