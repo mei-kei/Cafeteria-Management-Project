@@ -59,16 +59,16 @@ class admin{
     }
   
    //method to check the number of food variety
-    int check(Food head){
+    void check(Food head){
         Food current= head;
-        
+
         while(current!= null){
     if (current.title.equals(title)) {
         System.out.println("Title: " + current.title);
         System.out.println("Country of Origin: " + current.countryOfOrigin);
         System.out.println("Additional Information: " + current.info);
     
-    return;
+    return current;
 }
     }
 
