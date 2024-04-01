@@ -1,7 +1,7 @@
 /*
  * Course: Computer Science II, 201
  * Assignment: PMU Cafeteria Facilities for Faculty and Students 
- * Student Names: Furat Al Omran - 20221054
+ * Student Names: Furat Al Omran - 202201954
                   Manhah Iftikhar - 202100796
                   Maryam Alsaif - 202101179
                   Munira Altheeb - 202200822
@@ -56,6 +56,17 @@ class admin{
         }
         //making the next item on the menu as the top item after deletion of the previous one
         previous.next = current.next;
+    }
+  
+   //method to check the number of food variety
+    int check(Food head){
+        Food current= head;
+        int count=0;
+        while(current!=null) {
+            count++;
+            current=current.next;
+        }
+        return count;
     }
 
     //method to generate reports based on the report type
@@ -119,7 +130,7 @@ public class cafeCatalog {
                         System.out.println("Administrator Menu:");
                         System.out.println("a. Delete information of the food");
                         System.out.println("b. Search food on the menu");
-                        //System.out.println("c. Check the number of food varieties");
+                        System.out.println("c. Check the number of food varieties");
                         System.out.println("d. Generate the reports of the food based on:");
                         System.out.println("\t1. Food 'Title'");
                         System.out.println("\t2. Food 'Info'");
