@@ -8,6 +8,8 @@
  */
 import java.util.Scanner;
 
+import javax.sound.sampled.SourceDataLine;
+
 class Food{
     String title;
     String countryOfOrigin;
@@ -24,6 +26,14 @@ class Food{
 
 class admin{
     Food head;
+
+    void addFood(String title, String countryOfOrigin, String info){
+        
+    }
+
+    void searchFood(){
+
+    }
 
     //method to delete food item from the menu
     void deleteFood(String title){
@@ -58,20 +68,12 @@ class admin{
         previous.next = current.next;
     }
 
-    void searchFood(String title){
-        Food current = head;
-        while(current != null){
-            if(current.title.equals(title)){
-                System.out.println("Title: " + title);
-                System.out.println("Country of Origin: " + current.countryOfOrigin);
-                System.out.println("Additional Information: " + current.info);
+    void checkFood(){
 
-                return;
-            }
-            current = current.next;
-        }
-        System.out.println(title + " not found.");
     }
+
+
+//---
 
     //method to generate reports based on the report type
     void generateReports(String reportType){
@@ -110,7 +112,26 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
+    Scanner input;
+//inquire, request, complain
+    void inquireFood(String title){
+        System.out.println("Inquiring about food: " + title);
 
+        Food found = searchFood(title);
+        if(found != null){
+            System.out.println("Title: " + title);
+            System.out.println("Country of origin: " + found.countryOfOrigin);
+            System.out.println("Info: " + found.info);
+        } else{
+            System.out.println("Food not found.");
+        }
+    }
+
+    void requestFood(String title, String countryOfOrigin, String info, admin foodList){
+        System.out.println("Requesting new food variety: " + title);
+        foodList.addFood(title, countryOfOrigin, info);
+        System.out.println("Request submitted Successfully.");
+    }
 }
 
 public class cafeCatalog {
@@ -132,9 +153,10 @@ public class cafeCatalog {
                     //if user choice was 1. Admin
                     case 1:
                         System.out.println("Administrator Menu:");
+                        System.out.println("a. Add new food");
                         System.out.println("a. Delete information of the food");
                         System.out.println("b. Search food on the menu");
-                        //System.out.println("c. Check the number of food varieties");
+                        System.out.println("c. Check the number of food varieties");
                         System.out.println("d. Generate the reports of the food based on:");
                         System.out.println("\t1. Food 'Title'");
                         System.out.println("\t2. Food 'Info'");
@@ -156,8 +178,11 @@ public class cafeCatalog {
                                 String searchTitle = input.next();
                                 //foodList.searchFood(searchTitle);
                                 break;
-            
+                                
                             case "c":
+                                break;
+            
+                            case "d":
                                 System.out.println("Generate report based on:");
                                 String report = input.next();
                                 adminMenu.generateReports(report);
@@ -169,7 +194,6 @@ public class cafeCatalog {
                     case 2:
                         System.out.println("User Menu:");
                         System.out.println("a. Search food on the menu");
-                        System.out.println("b. Check the number of food varieties");
                         System.out.println("c. Inquire/Get food information");
                         System.out.println("d. Request for a new variety of food");
                         System.out.println("e. Raise a complain about the non-availability of a food");
