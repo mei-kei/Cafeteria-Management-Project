@@ -115,26 +115,7 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
-    /*Scanner input;
-//inquire, request, complain
-    void inquireFood(String title){
-        System.out.println("Inquiring about food: " + title);
-
-        //Food found = searchFood(title);
-        if(found != null){
-            System.out.println("Title: " + title);
-            System.out.println("Country of origin: " + found.countryOfOrigin);
-            System.out.println("Info: " + found.info);
-        } else{
-            System.out.println("Food not found.");
-        }
-    }
-
-    void requestFood(String title, String countryOfOrigin, String info, admin foodList){
-        System.out.println("Requesting new food variety: " + title);
-        //foodList.addFood(title, countryOfOrigin, info);
-        System.out.println("Request submitted Successfully.");
-    }*/
+    
 }
 
 public class cafeCatalog {
@@ -177,7 +158,7 @@ public class cafeCatalog {
                             case "b":
                                 System.out.println("\nEnter food title to search: ");
                                 String searchTitle = input.next();
-                                //foodList.searchFood(searchTitle);
+                                //adminMenu.searchFood(searchTitle);
                                 break;
                                 
                             case "c":
@@ -213,7 +194,7 @@ public class cafeCatalog {
                             case "a":
                                 System.out.println("\nEnter the title of the food to search: ");
                                 String title = input.next();
-                                //user.searchFood(title, foodList);
+                                //userMenu.searchFood(title, foodList);
                                 break;
             
                             case "b":
@@ -223,7 +204,7 @@ public class cafeCatalog {
                                 String country = input.next();
                                 System.out.println("Enter additional info: ");
                                 String info = input.next();
-                                //user.searchFood(title, country, info); --searchFood method tobe added
+                                //userMenu.searchFood(title, country, info); --searchFood method tobe added
                                 break;
             
                             case "c":
