@@ -132,7 +132,7 @@ class user extends admin{
 
     void requestFood(String title, String countryOfOrigin, String info, admin foodList){
         System.out.println("Requesting new food variety: " + title);
-        foodList.addFood(title, countryOfOrigin, info);
+        //foodList.addFood(title, countryOfOrigin, info);
         System.out.println("Request submitted Successfully.");
     }
 }
@@ -157,10 +157,10 @@ public class cafeCatalog {
                     case 1:
                         System.out.println("Administrator Menu:");
                         System.out.println("a. Add new food");
-                        System.out.println("a. Delete information of the food");
                         System.out.println("b. Search food on the menu");
-                        System.out.println("c. Check the number of food varieties");
-                        System.out.println("d. Generate the reports of the food based on:");
+                        System.out.println("c. Delete information of the food");
+                        System.out.println("d. Check the number of food varieties");
+                        System.out.println("e. Generate the reports of the food based on:");
                         System.out.println("\t1. Food 'Title'");
                         System.out.println("\t2. Food 'Info'");
                         System.out.println("\t3. Food 'Country'");
@@ -171,9 +171,7 @@ public class cafeCatalog {
                         switch (admin) {
             
                             case "a":
-                                System.out.print("\nEnter title of the food to delete: ");
-                                String deleteTitle = input.next();
-                                adminMenu.deleteFood(deleteTitle);
+
                                 break;
             
                             case "b":
@@ -183,14 +181,22 @@ public class cafeCatalog {
                                 break;
                                 
                             case "c":
+                                System.out.print("\nEnter title of the food to delete: ");
+                                String deleteTitle = input.next();
+                                adminMenu.deleteFood(deleteTitle);
                                 break;
             
                             case "d":
+                                int foodCount = adminMenu.checkFood();
+                                System.out.println("Number of food varieties: " + foodCount);
+                                break;
+
+                            case "e":
                                 System.out.println("Generate report based on:");
                                 String report = input.next();
                                 adminMenu.generateReports(report);
-                                break;
-                        }
+                                break;                            
+                            }
                         break;
             
                     //if user choice was 2. User
