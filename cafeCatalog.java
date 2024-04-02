@@ -25,7 +25,7 @@ class Food{
 class admin{
     Food head;
 
-    void addFood(String title, String countryOfOrigin, String info){
+    void addFood(){
         
     }
 
