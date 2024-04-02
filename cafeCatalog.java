@@ -66,12 +66,17 @@ class admin{
         previous.next = current.next;
     }
 
-    void checkFood(){
+    //method to check the number of food varieties
+    public int checkFood() {
+        Food temp = head;
 
+        int count = 0;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
     }
-
-
-//---
 
     //method to generate reports based on the report type
     void generateReports(String reportType){
