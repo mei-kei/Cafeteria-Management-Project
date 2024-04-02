@@ -115,12 +115,12 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
-    Scanner input;
+    /*Scanner input;
 //inquire, request, complain
     void inquireFood(String title){
         System.out.println("Inquiring about food: " + title);
 
-        Food found = searchFood(title);
+        //Food found = searchFood(title);
         if(found != null){
             System.out.println("Title: " + title);
             System.out.println("Country of origin: " + found.countryOfOrigin);
@@ -134,7 +134,7 @@ class user extends admin{
         System.out.println("Requesting new food variety: " + title);
         //foodList.addFood(title, countryOfOrigin, info);
         System.out.println("Request submitted Successfully.");
-    }
+    }*/
 }
 
 public class cafeCatalog {
