@@ -8,8 +8,6 @@
  */
 import java.util.Scanner;
 
-import javax.sound.sampled.SourceDataLine;
-
 class Food{
     String title;
     String countryOfOrigin;
