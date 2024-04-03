@@ -26,12 +26,26 @@ class admin{
     Food head;
 
     void addFood(){
-        
-    }
 
+      
+    }
+  // Maryam
     void searchFood(){
-
+      
+    
+public Food searchFood(String code, Scanner scanner) {
+        System.out.print("Enter title of the food to search: ");
+       code = scanner.next();
+        for (Food food: foodMenu) {
+            if (food.getcode().equals(code)) {
+                return food;
+            }
+        }
+        return null;
     }
+    }
+
+    
 
     //method to delete food item from the menu
     void deleteFood(String title){
@@ -77,7 +91,7 @@ class admin{
         }
         return count;
     }
-
+}
     //method to generate reports based on the report type
     void generateReports(String reportType){
         //creating a temporary pointer to the head
@@ -115,7 +129,20 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
-    
+
+
+  // Maryam
+    public void requestedFood(Food food, Scanner scanner) {
+        System.out.print("Enter code of the food to inquire about: ");
+        String requestedCode = scanner.next();
+        if (food != null) {
+            System.out.println("Code: " + food.getCode());
+            System.out.println("Title: " + food.getTitle());
+            System.out.println("Origin: " + food.getOrigin());
+        } else {
+            System.out.println("Food not found.");
+        }
+    }
 }
 
 public class cafeCatalog {
