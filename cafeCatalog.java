@@ -132,10 +132,8 @@ class user extends admin{
 
     }
 
-    void foodComplaint(String complaint, String title, Scanner input){
-        System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
-        complaint = input.next();
-        System.out.println("Your complaint about the non-availability of '" + title + "' has been registered.");
+    void foodComplaint(String complaint){
+        System.out.println("Your complaint about the non-availability of '" + complaint + "' has been registered.");
     }
 }
 
