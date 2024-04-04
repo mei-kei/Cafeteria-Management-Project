@@ -25,11 +25,15 @@ class Food{
 class admin{
     Food head;
 
+    admin(){
+        this.head = null;
+    }
+
     void addFood(){
         
     }
 
-    void searchFood(){
+    void searchFood(String title){
 
     }
 
@@ -118,7 +122,7 @@ class user extends admin{
     //method to inquire about the specific food including the information
     void inquireFood(String title, String countryOfOrigin, String info){
         System.out.println("Inquiring about food: " + title);
-        //Food found = super.searchFood(title);
+        Food found = searchFood(title);
         if(found != null){
             System.out.println("Title: " + title);
             System.out.println("Country of Origin: " + countryOfOrigin);
