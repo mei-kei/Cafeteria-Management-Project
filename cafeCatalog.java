@@ -221,7 +221,7 @@ public class cafeCatalog {
                             case "a":
                                 System.out.println("\nEnter the title of the food to search: ");
                                 String title = input.next();
-                                //userMenu.searchFood(title, foodList);
+                                //userMenu.searchFood();
                                 break;
             
                             case "b":
