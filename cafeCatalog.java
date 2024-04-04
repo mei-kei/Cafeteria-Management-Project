@@ -136,7 +136,7 @@ class user extends admin{
 
     }
 
-    void foodComplaint(Scanner input, String complaint){
+    void foodComplaint(Scanner input){
         System.out.println("Enter the title of the food to complain about: ");
         String title = input.next();
         System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
@@ -235,7 +235,7 @@ public class cafeCatalog {
                                 break;
             
                             case "c":
-                                userMenu.foodComplaint(input, info);
+                                userMenu.foodComplaint(input);
                                 break;
             
                             case "d":
