@@ -120,7 +120,7 @@ class admin{
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
     //method to inquire about the specific food including the information
-    void inquireFood(String title, String countryOfOrigin, String info){
+    /*void inquireFood(String title, String countryOfOrigin, String info){
         System.out.println("Inquiring about food: " + title);
         Food found = searchFood(title);
         if(found != null){
@@ -130,17 +130,17 @@ class user extends admin{
         } else{
             System.out.println("Food not found.");
         }
-    }
+    }*/
 
     void requestFood(){
 
     }
 
-    void foodComplaint(Scanner input){
+    void foodComplaint(Scanner input, String complaint){
         System.out.println("Enter the title of the food to complain about: ");
         String title = input.next();
         System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
-        String complaint = input.next();
+        complaint = input.next();
         System.out.println("Your complaint has been registered.\n");
     }
 }
@@ -235,7 +235,7 @@ public class cafeCatalog {
                                 break;
             
                             case "c":
-                                userMenu.foodComplaint(input);
+                                userMenu.foodComplaint(input, info);
                                 break;
             
                             case "d":
