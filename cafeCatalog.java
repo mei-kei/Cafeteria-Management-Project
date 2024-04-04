@@ -78,17 +78,6 @@ class admin{
         return count;
     }
 
-    /*    public int checkFood() {
-        Food temp = head;
-
-        int count = 0;
-        while (temp != null) {
-            count++;
-            temp = temp.next;
-        }
-        return count;
-    } */
-
     //method to generate reports based on the report type
     void generateReports(String reportType){
         //creating a temporary pointer to the head
@@ -126,7 +115,28 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
-    
+    //method to inquire about the specific food including the information
+    void inquireFood(String title, String countryOfOrigin, String info){
+        System.out.println("Inquiring about food: " + title);
+        //Food found = super.searchFood(title);
+        if(found != null){
+            System.out.println("Title: " + title);
+            System.out.println("Country of Origin: " + countryOfOrigin);
+            System.out.println("Info: " + info);
+        } else{
+            System.out.println("Food not found.");
+        }
+    }
+
+    void requestFood(){
+
+    }
+
+    void foodComplaint(String complaint, String title, Scanner input){
+        System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
+        complaint = input.next();
+        System.out.println("Your complaint about the non-availability of '" + title + "' has been registered.");
+    }
 }
 
 public class cafeCatalog {
@@ -221,7 +231,7 @@ public class cafeCatalog {
                             case "c":
                                 System.out.println("Enter food title to complain about: ");
                                 String complaint = input.next();
-                                //userMenu.complaint(complaint);
+                                userMenu.foodComplaint(complaint);
                                 break;
             
                             case "d":
@@ -231,10 +241,7 @@ public class cafeCatalog {
                                 System.out.println("Invalid choice.");
                                 break;
                         }
-                        if (user.equals("d")) {
-                            break;
-                        }
-                        break;
+                    break;
             
                     case 3:
                         System.out.println("Exiting menu...");
