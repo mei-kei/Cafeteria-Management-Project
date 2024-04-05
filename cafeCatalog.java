@@ -7,7 +7,6 @@
                   Munira Altheeb - 202200822
  */
 import java.util.Scanner;
-//
 
 class Food{
     String title;
@@ -30,11 +29,20 @@ class admin{
         this.head = null;
     }
 
-    /*
     //method to add new food and its information on the menu (munira)
-    void addFood(){
-
-    }*/
+    void addFood(String title, String countryOfOrigin, String info){
+        Food newFood = new Food(title, countryOfOrigin, info);
+        if(head == null){
+            head = newFood;
+        } else {
+            Food temp = head;
+            while(temp.next != null){
+                temp = temp.next;
+        }
+        temp.next = newFood;
+        }
+        System.out.println("\nFood added successfully.\n");
+    }
 
     //method to search for a food item on the menu (maryam)
     Food searchFood(String title){
@@ -91,6 +99,7 @@ class admin{
 
         int count = 0;
         while (temp != null) {
+            System.out.println("Displaying food varieties...");
             System.out.println("Title: " + temp.title);
             System.out.println("Country of Origin: " + temp.countryOfOrigin);
             System.out.println("Info: " + temp.info + "\n");
@@ -194,17 +203,17 @@ public class cafeCatalog {
                         System.out.println("f. Exit admin menu");
                         System.out.println();
                         
-                        String adminChoice = input.next();
+                        String admin = input.next();
                         
-                        switch (adminChoice) {
+                        switch (admin) {
                             //calling the addFood method (munira)
                             case "a":
-                            
+
                             break;
         
                             //calling the searchFood method (maryam)
                             case "b":
-                            
+
                             break;
                             
                             //calling the deleteFood method
@@ -222,6 +231,7 @@ public class cafeCatalog {
                             //calling the generateReport method
                             case "e":
                             System.out.println("Generate report based on:");
+                            input.nextLine();
                             String report = input.nextLine();
                             adminMenu.generateReport(report);
                             break;
@@ -235,7 +245,7 @@ public class cafeCatalog {
                             break;
                         }
                         
-                        if (adminChoice.equals("f")) {
+                        if (admin.equals("f")) {
                             break;
                         }
                     break;
