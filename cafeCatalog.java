@@ -90,6 +90,10 @@ class admin{
 
         int count = 0;
         while (temp != null) {
+            System.out.println("Title: " + temp.title);
+            System.out.println("Country of Origin: " + temp.countryOfOrigin);
+            System.out.println("Info: " + temp.info + "\n");
+
             count++;
             temp = temp.next;
         }
@@ -177,7 +181,6 @@ public class cafeCatalog {
                 switch (choice) {
                     //if user choice was 1. Admin
                     case 1:
-                    while (true) {
                         System.out.println("Administrator Menu:");
                         System.out.println("a. Add new food");
                         System.out.println("b. Search food on the menu");
@@ -234,12 +237,10 @@ public class cafeCatalog {
                         if (adminChoice.equals("f")) {
                             break;
                         }
-                    }
                     break;
                     
                     //if user choice was 2. User
                     case 2:
-                    while (true) {
                         System.out.println("User Menu:");
                         System.out.println("a. Inquire/Get food information");
                         System.out.println("b. Request for a new variety of food");
@@ -276,7 +277,6 @@ public class cafeCatalog {
                         if (user.equals("d")) {
                             break;
                         }
-                    }
                     break;
 
                     //if user choice was 3. Exit
