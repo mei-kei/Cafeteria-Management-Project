@@ -31,37 +31,44 @@ class admin{
 
     void addFood(String title, String countryOfOrigin, String info){
         Food newFood = new Food(title, countryOfOrigin, info);
-        Food temp = head;
-        while(temp.next != null){
-            temp = temp.next;
+        if(head == null){
+            head = newFood;
+        } else {
+            Food temp = head;
+            while(temp.next != null){
+                temp = temp.next;
         }
         temp.next = newFood;
+        }
+        System.out.println("\nFood added successfully.\n");
     }
 
     void searchFood(String title){
-       Food current = head;
-       while (current != null) {
-        if (current.title.equals(title) || current.info.equals(current.info)) {
-            System.out.println("Title: " + title);
-            System.out.println("Country of Origin: " + current.countryOfOrigin);
-            System.out.println("Info: " + current.info);
+        Food current = head;
+        while (current != null) {
+            if (current.title.equals(title) || current.countryOfOrigin.equals(title) || current.info.equals(title)){
+                System.out.println("Title: " + current.title);
+                System.out.println("Country of Origin: " + current.countryOfOrigin);
+                System.out.println("Info: " + current.info + "\n");
+                return;
+            }
+            current = current.next;
         }
-        current = current.next;
-    }
-    System.out.println(title + " not found.\n");
+        System.out.println(title + " not found.\n");
     }
 
     //method to delete food item from the menu
     void deleteFood(String title){
         //to check if the menu is empty
         if(head == null){
-            System.out.println("This list is empty");
+            System.out.println("This list is empty\n");
             return;
         }
 
         //to check if the food item is in the head of the menu or not
         if(head.title.equals(title)){
             head = head.next;
+            System.out.println("\n" + title + " was successfully deleted from the menu.");
             return;
         }
 
@@ -72,7 +79,7 @@ class admin{
         while(current != null && !current.title.equals(title)){
             previous = current; //storing the reference variable to the previous item on the menu
             current = current.next; //moving to the next item on the menu
-            System.out.println("\n" + title + " was successfully removed from the menu.\n");
+            //System.out.println("\n" + title + " was successfully removed from the menu.\n");
         }
 
         //displaying a message to indicate if the food was not found
@@ -147,23 +154,19 @@ class user extends admin{
     }*/
 
     void requestFood(Scanner input){
-    
-System.out.println(" Enter the title of food you want to request");
-      String Title =input.next();
-      System.out.println(" Enter the food's Country of origin that you would like to request");
-      String countryOfOrigin = input.next();
-      System.out.println(" Enter the food's info you would like to request ");
-      String info = input.next();
-     System.out.println(" your request for the Food "+Title+"country of origin " +countryOfOrigin+"and info"+info+" has been received !");
-      
-      
+        System.out.println(" Enter the title of food you want to request");
+        String title =input.next();
+        System.out.println(" Enter the food's Country of origin that you would like to request");
+        String countryOfOrigin = input.next();
+        System.out.println(" Enter the food's info you would like to request ");
+        String info = input.next();
+        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + countryOfOrigin + "\nInfo: " + info + " has been registered.");
     }
 
     void foodComplaint(Scanner input){
         System.out.println("Enter the title of the food to complain about: ");
         String title = input.next();
         System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
-        //complaint = input.next();
         System.out.println("Your complaint has been registered.\n");
     }
 }
@@ -251,7 +254,7 @@ public class cafeCatalog {
                             break;
             
                             case "b":
-                            
+                                userMenu.requestFood(input);
                                 break;
             
                             case "c":
