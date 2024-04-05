@@ -29,7 +29,9 @@ class admin{
         this.head = null;
     }
 
-    /*void addFood(){
+    /*
+    //method to add new food and its information on the menu (munira)
+    void addFood(){
 
     }*/
 
@@ -64,7 +66,7 @@ class admin{
             return;
         }
 
-        //iterating through the menu to find the food item to be deleted
+        //iterating through the menu to find the next food item to place as the 'head'
         Food current = head;
         Food previous = null;
 
@@ -95,7 +97,7 @@ class admin{
     }
 
     //method to generate reports based on the report type (manhah)
-    void generateReports(String reportType){
+    void generateReport(String reportType){
         //creating a temporary pointer to the head
         Food temp = head;
 
@@ -131,20 +133,9 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
-    //method to inquire about the specific food including the information (manhah - check again)
-    void inquireFood(Scanner input){
-        System.out.println("Enter the title of the food to inquire about: ");
-        String title = input.next();
+    //method to inquire about the specific food including the information (munira)
+    void inquireFood(){
 
-        Food found = searchFood(title);
-        if(found != null){
-            System.out.println("Food found: ");
-            System.out.println("Title: " + found.title);
-            System.out.println("Country of Origin: " + found.countryOfOrigin);
-            System.out.println("Info: " + found.info);
-        } else {
-            System.out.println("Food not found.");
-        }
     }
 
     //method to request for a new food item (maryam)
@@ -202,31 +193,33 @@ public class cafeCatalog {
                         String adminChoice = input.next();
                         
                         switch (adminChoice) {
+                            //calling the addFood method (munira)
                             case "a":
                             
                             break;
         
+                            //calling the searchFood method (maryam)
                             case "b":
-                            System.out.println("\nEnter food title to search: ");
-                            String searchTitle = input.next();
-                            adminMenu.searchFood(searchTitle);
+                            
                             break;
                             
+                            //calling the deleteFood method
                             case "c":
                             System.out.print("\nEnter title of the food to delete: ");
                             String deleteTitle = input.next();
                             adminMenu.deleteFood(deleteTitle);
                             break;
                             
+                            //calling the checkFood method (furat)
                             case "d":
-                            int foodCount = adminMenu.checkFood();
-                            System.out.println("Number of food varieties: " + foodCount);
+
                             break;
                             
+                            //calling the generateReport method
                             case "e":
                             System.out.println("Generate report based on:");
                             String report = input.nextLine();
-                            adminMenu.generateReports(report);
+                            adminMenu.generateReport(report);
                             break;
                             
                             case "f":
@@ -257,12 +250,14 @@ public class cafeCatalog {
                         String user = input.next();
                         
                         switch (user) {
+                            //calling the inquireFood method (munira)
                             case "a":
-                            userMenu.inquireFood(input);
+                            
                             break;
                             
+                            //calling the request method (maryam)
                             case "b":
-                            userMenu.requestFood(input);
+
                             break;
         
                             case "c":
