@@ -46,7 +46,7 @@ class admin{
     void searchFood(String title){
         Food current = head;
         while (current != null) {
-            if (current.title.equals(title) || current.countryOfOrigin.equals(title) || current.info.equals(title)){
+            if (current.title.equals(title)){
                 System.out.println("Title: " + current.title);
                 System.out.println("Country of Origin: " + current.countryOfOrigin);
                 System.out.println("Info: " + current.info + "\n");
