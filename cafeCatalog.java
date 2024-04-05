@@ -231,8 +231,7 @@ public class cafeCatalog {
                             //calling the generateReport method
                             case "e":
                             System.out.println("Generate report based on:");
-                            input.nextLine();
-                            String report = input.nextLine();
+                            String report = input.next();
                             adminMenu.generateReport(report);
                             break;
                             
