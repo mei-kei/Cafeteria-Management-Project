@@ -29,25 +29,27 @@ class admin{
         this.head = null;
     }
 
-    void addFood(){
-        
+    void addFood(String title, String countryOfOrigin, String info){
+        Food newFood = new Food(title, countryOfOrigin, info);
+        Food temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = newFood;
     }
 
     void searchFood(String title){
        Food current = head;
-            System.out.println("Enter the name of food ,or it's country of origin ,or it's info you are looking for: " + title);
-            while (current != null) {
-                if (current.title.equals(title) ||
-                current.countryOfOrigin.equals(current.countryOfOrigin)||
-                current.info.equals(current.info)) {
-                    System.out.println("Title: " + title);
-                    System.out.println("Country of Origin: " + current.countryOfOrigin);
-                    System.out.println("Info: " + current.info);
-                }
-                current = current.next;
-            }
-            System.out.println(title + "not found.");
+       while (current != null) {
+        if (current.title.equals(title) || current.info.equals(current.info)) {
+            System.out.println("Title: " + title);
+            System.out.println("Country of Origin: " + current.countryOfOrigin);
+            System.out.println("Info: " + current.info);
         }
+        current = current.next;
+    }
+    System.out.println(title + "not found.");
+    }
 
     //method to delete food item from the menu
     void deleteFood(String title){
@@ -161,7 +163,7 @@ System.out.println(" Enter the title of food you want to request");
         System.out.println("Enter the title of the food to complain about: ");
         String title = input.next();
         System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
-        complaint = input.next();
+        //complaint = input.next();
         System.out.println("Your complaint has been registered.\n");
     }
 }
@@ -200,7 +202,13 @@ public class cafeCatalog {
                         switch (admin) {
             
                             case "a":
-                            
+                            System.out.println("Enter food title: ");
+                            String title = input.next();
+                            System.out.println("Enter country of origin: ");
+                            String country = input.next();
+                            System.out.println("Enter additional info: ");
+                            String info = input.next();
+                            adminMenu.addFood(title, country, info);
                                 break;
             
                             case "b":
@@ -231,28 +239,19 @@ public class cafeCatalog {
                     //if user choice was 2. User
                     case 2:
                         System.out.println("User Menu:");
-                        System.out.println("a. Search food on the menu");
-                        System.out.println("c. Inquire/Get food information");
-                        System.out.println("d. Request for a new variety of food");
-                        System.out.println("e. Raise a complain about the non-availability of a food");
+                        System.out.println("a. Inquire/Get food information");
+                        System.out.println("b. Request for a new variety of food");
+                        System.out.println("c. Raise a complain about the non-availability of a food");
             
                         String user = input.next();
             
                         switch (user) {
                             case "a":
-                                System.out.println("\nEnter the title of the food to search: ");
-                                String title = input.next();
-                                //userMenu.searchFood();
-                                break;
+
+                            break;
             
                             case "b":
-                                System.out.println("\nEnter food title: ");
-                                String foodTitle = input.next();
-                                System.out.println("Enter country of origin: ");
-                                String country = input.next();
-                                System.out.println("Enter additional info: ");
-                                String info = input.next();
-                                //userMenu.searchFood(title, country, info); --searchFood method tobe added
+                            
                                 break;
             
                             case "c":
