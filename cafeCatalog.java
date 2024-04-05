@@ -43,18 +43,19 @@ class admin{
         System.out.println("\nFood added successfully.\n");
     }
 
-    void searchFood(String title){
+    Food searchFood(String title){
         Food current = head;
         while (current != null) {
             if (current.title.equals(title)){
                 System.out.println("Title: " + current.title);
                 System.out.println("Country of Origin: " + current.countryOfOrigin);
                 System.out.println("Info: " + current.info + "\n");
-                return;
+                return current;
             }
             current = current.next;
         }
         System.out.println(title + " not found.\n");
+        return null;
     }
 
     //method to delete food item from the menu
@@ -140,17 +141,20 @@ class admin{
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
     //method to inquire about the specific food including the information
-    /*void inquireFood(String title, String countryOfOrigin, String info){
-        System.out.println("Inquiring about food: " + title);
+    void inquireFood(Scanner input){
+        System.out.println("Enter the title of the food to inquire about: ");
+        String title = input.next();
+
         Food found = searchFood(title);
         if(found != null){
-            System.out.println("Title: " + title);
-            System.out.println("Country of Origin: " + countryOfOrigin);
-            System.out.println("Info: " + info);
-        } else{
+            System.out.println("Food found: ");
+            System.out.println("Title: " + found.title);
+            System.out.println("Country of Origin: " + found.countryOfOrigin);
+            System.out.println("Info: " + found.info);
+        } else {
             System.out.println("Food not found.");
         }
-    }*/
+    }
 
     void requestFood(Scanner input){
         System.out.println(" Enter the title of food you want to request");
@@ -266,7 +270,7 @@ public class cafeCatalog {
                         
                         switch (user) {
                             case "a":
-
+                            userMenu.inquireFood(input);
                             break;
                             
                             case "b":
