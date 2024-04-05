@@ -25,23 +25,45 @@ class Food{
 class admin{
     Food head;
 
+    String[] requests;
+    int next;
+
     admin(){
         this.head = null;
+        this.requests = new String[100];
+        this.next = 0;
     }
 
     //method to add new food and its information on the menu (munira)
-    void addFood(String title, String countryOfOrigin, String info){
-        Food newFood = new Food(title, countryOfOrigin, info);
-        if(head == null){
-            head = newFood;
-        } else {
-            Food temp = head;
-            while(temp.next != null){
-                temp = temp.next;
-        }
-        temp.next = newFood;
-        }
-        System.out.println("\nFood added successfully.\n");
+    void addFood(){
+
+    }
+    //method to inquire about the specific food including the information (munira)
+    void inquireFood(){
+
+    }
+    //method to request for a new food item (maryam)
+    void requestFood(Scanner input){
+        System.out.println(" Enter the title of food you want to request");
+        String title =input.next();
+        System.out.println(" Enter the food's country of origin: ");
+        String country = input.next();
+        System.out.println(" Enter the food's info : ");
+        String info = input.nextLine();
+        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");
+    }
+
+    //method to update the requests or new requirements from the faculty or the students
+    void updateRequests(Scanner input){
+        
+    }
+
+    //method to file a complaint if any (manhah)
+    void foodComplaint(Scanner input){
+        System.out.println("Enter the title of the food to complain about: ");
+        String title = input.next();
+        System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
+        System.out.println("Your complaint has been registered.\n");
     }
 
     //method to search for a food item on the menu (maryam)
@@ -145,30 +167,21 @@ class admin{
     }
 }
 
-//class user extends admin as the user class utilises certain functions from admin class
+//class user extends admin as the user class utilises certain functions from admin class (manhah)
 class user extends admin{
-    //method to inquire about the specific food including the information (munira)
+    //implementing the same method to inquire about the specific food for the user
     void inquireFood(){
-
+        super.inquireFood();
     }
 
-    //method to request for a new food item (maryam)
+    //implementing the same method to request for a new food item for the user
     void requestFood(Scanner input){
-        System.out.println(" Enter the title of food you want to request");
-        String title =input.next();
-        System.out.println(" Enter the food's country of origin: ");
-        String country = input.next();
-        System.out.println(" Enter the food's info : ");
-        String info = input.nextLine();
-        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");
+        super.requestFood(input);
     }
 
-    //method to file a complaint if any (manhah - check again)
+    //implementing the same method to file a complaint if any for the user
     void foodComplaint(Scanner input){
-        System.out.println("Enter the title of the food to complain about: ");
-        String title = input.next();
-        System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
-        System.out.println("Your complaint has been registered.\n");
+        super.foodComplaint(input);
     }
 }
 
@@ -195,12 +208,13 @@ public class cafeCatalog {
                         System.out.println("a. Add new food");
                         System.out.println("b. Search food on the menu");
                         System.out.println("c. Delete information of the food");
-                        System.out.println("d. Check the number of food varieties");
-                        System.out.println("e. Generate the reports of the food based on:");
+                        System.out.println("d. Update requests or requirements from faculty or students");
+                        System.out.println("e. Check the number of food varieties");
+                        System.out.println("f. Generate the reports of the food based on:");
                         System.out.println("\t1. Food 'Title'");
                         System.out.println("\t2. Food 'Info'");
                         System.out.println("\t3. Food 'Country'");
-                        System.out.println("f. Exit admin menu");
+                        System.out.println("g. Exit admin menu");
                         System.out.println();
                         
                         String admin = input.next();
@@ -222,20 +236,25 @@ public class cafeCatalog {
                             String deleteTitle = input.next();
                             adminMenu.deleteFood(deleteTitle);
                             break;
+
+                            //calling the updateRequests method
+                            case "d":
+                            adminMenu.updateRequests(input);
+                            break;
                             
                             //calling the checkFood method (furat)
-                            case "d":
+                            case "e":
 
                             break;
                             
                             //calling the generateReport method
-                            case "e":
+                            case "f":
                             System.out.println("Generate report based on:");
                             String report = input.next();
                             adminMenu.generateReport(report);
                             break;
                             
-                            case "f":
+                            case "g":
                             System.out.println("Exiting Admin Menu...");
                             break;
                             
