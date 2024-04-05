@@ -29,20 +29,11 @@ class admin{
         this.head = null;
     }
 
-    void addFood(String title, String countryOfOrigin, String info){
-        Food newFood = new Food(title, countryOfOrigin, info);
-        if(head == null){
-            head = newFood;
-        } else {
-            Food temp = head;
-            while(temp.next != null){
-                temp = temp.next;
-        }
-        temp.next = newFood;
-        }
-        System.out.println("\nFood added successfully.\n");
-    }
+    /*void addFood(){
 
+    }*/
+
+    //method to search for a food item on the menu (maryam)
     Food searchFood(String title){
         Food current = head;
         while (current != null) {
@@ -58,7 +49,7 @@ class admin{
         return null;
     }
 
-    //method to delete food item from the menu
+    //method to delete food item from the menu (manhah)
     void deleteFood(String title){
         //to check if the menu is empty
         if(head == null){
@@ -91,7 +82,7 @@ class admin{
         previous.next = current.next;
     }
 
-    //method to check the number of food varieties
+    //method to check the number of food varieties (furat)
     public int checkFood() {
         Food temp = head;
 
@@ -103,7 +94,7 @@ class admin{
         return count;
     }
 
-    //method to generate reports based on the report type
+    //method to generate reports based on the report type (manhah)
     void generateReports(String reportType){
         //creating a temporary pointer to the head
         Food temp = head;
@@ -140,7 +131,7 @@ class admin{
 
 //class user extends admin as the user class utilises certain functions from admin class
 class user extends admin{
-    //method to inquire about the specific food including the information
+    //method to inquire about the specific food including the information (manhah - check again)
     void inquireFood(Scanner input){
         System.out.println("Enter the title of the food to inquire about: ");
         String title = input.next();
@@ -156,16 +147,18 @@ class user extends admin{
         }
     }
 
+    //method to request for a new food item (maryam)
     void requestFood(Scanner input){
         System.out.println(" Enter the title of food you want to request");
         String title =input.next();
-        System.out.println(" Enter the food's Country of origin that you would like to request");
-        String countryOfOrigin = input.next();
-        System.out.println(" Enter the food's info you would like to request ");
+        System.out.println(" Enter the food's country of origin: ");
+        String country = input.next();
+        System.out.println(" Enter the food's info : ");
         String info = input.next();
-        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + countryOfOrigin + "\nInfo: " + info + " has been registered.");
+        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");
     }
 
+    //method to file a complaint if any (manhah - check again)
     void foodComplaint(Scanner input){
         System.out.println("Enter the title of the food to complain about: ");
         String title = input.next();
@@ -174,6 +167,7 @@ class user extends admin{
     }
 }
 
+//a main method to run the catalog menu for both the admin and the user (manhah)
 public class cafeCatalog {
     public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
@@ -187,8 +181,8 @@ public class cafeCatalog {
                 System.out.println("3. Exit");
                 
                 int choice = input.nextInt();
-                //nested switch cases considering two types of users: admin and students
                 
+                //nested switch cases considering two types of users: admin and students
                 switch (choice) {
                     //if user choice was 1. Admin
                     case 1:
@@ -209,13 +203,7 @@ public class cafeCatalog {
                         
                         switch (adminChoice) {
                             case "a":
-                            System.out.println("Enter food title: ");
-                            String title = input.next();
-                            System.out.println("Enter country of origin: ");
-                            String country = input.next();
-                            System.out.println("Enter additional info: ");
-                            String info = input.next();
-                            adminMenu.addFood(title, country, info);
+                            
                             break;
         
                             case "b":
