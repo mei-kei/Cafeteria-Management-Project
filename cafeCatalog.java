@@ -33,7 +33,20 @@ class admin{
         
     }
 
-    void searchFood(String title){
+    void searchFood(String title, String countryOfOrigin, String info){
+       Food current = head;
+            System.out.println("Enter the name of food ,or it's country of origin ,or it's info you are looking for: " + keyword);
+            while (current != null) {
+                if (current.Food.title()= title ||
+                        current.Food.countryOfOrigin()=countryOfOrigin ||
+                        current.Food.info()= info {
+                    //System.out.println(current.food);
+                    return ("Food title :"+title+"Food country of origin "+countryOfOrigin+ "Food info :"+info);
+                }
+                current = current.next;
+            }
+            return (" This Food Item is not available ") ;
+        }
 
     }
 
@@ -132,8 +145,17 @@ class user extends admin{
         }
     }*/
 
-    void requestFood(){
-
+    void requestFood(Scanner input){
+    
+System.out.println(" Enter the title of food you want to request");
+      String Title =input.next();
+      System.out.println(" Enter the food's Country of origin that you would like to request");
+      String countryOfOrigin = input.next();
+      System.out.println(" Enter the food's info you would like to request ");
+      String info = input.next();
+     System.out.println(" your request for the Food "+Title+"country of origin " +countryOfOrigin+"and info"+info+" has been received !");
+      
+      
     }
 
     void foodComplaint(Scanner input){
