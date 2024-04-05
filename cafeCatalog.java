@@ -197,89 +197,128 @@ public class cafeCatalog {
                         System.out.println("\t1. Food 'Title'");
                         System.out.println("\t2. Food 'Info'");
                         System.out.println("\t3. Food 'Country'");
+                        System.out.println("f. Exit admin menu");
                         System.out.println();
             
                         String admin = input.next();
             
-                        switch (admin) {
-            
-                            case "a":
-                            System.out.println("Enter food title: ");
-                                String title = input.next();
-                                System.out.println("Enter country of origin: ");
-                                String country = input.next();
-                                System.out.println("Enter additional info: ");
-                                String info = input.next();
-                                adminMenu.addFood(title, country, info);
+                        switch (choice) {
+                            //if user choice was 1. Admin
+                            case 1:
+                                while (true) {
+                                    System.out.println("Administrator Menu:");
+                                    System.out.println("a. Add new food");
+                                    System.out.println("b. Search food on the menu");
+                                    System.out.println("c. Delete information of the food");
+                                    System.out.println("d. Check the number of food varieties");
+                                    System.out.println("e. Generate the reports of the food based on:");
+                                    System.out.println("\t1. Food 'Title'");
+                                    System.out.println("\t2. Food 'Info'");
+                                    System.out.println("\t3. Food 'Country'");
+                                    System.out.println("f. Exit admin menu");
+                                    System.out.println();
+        
+                                    String adminChoice = input.next();
+        
+                                    switch (adminChoice) {
+                                        case "a":
+                                            System.out.println("Enter food title: ");
+                                            String title = input.next();
+                                            System.out.println("Enter country of origin: ");
+                                            String country = input.next();
+                                            System.out.println("Enter additional info: ");
+                                            String info = input.next();
+                                            adminMenu.addFood(title, country, info);
+                                            break;
+        
+                                        case "b":
+                                            System.out.println("\nEnter food title to search: ");
+                                            String searchTitle = input.next();
+                                            adminMenu.searchFood(searchTitle);
+                                            break;
+        
+                                        case "c":
+                                            System.out.print("\nEnter title of the food to delete: ");
+                                            String deleteTitle = input.next();
+                                            adminMenu.deleteFood(deleteTitle);
+                                            break;
+        
+                                        case "d":
+                                            int foodCount = adminMenu.checkFood();
+                                            System.out.println("Number of food varieties: " + foodCount);
+                                            break;
+        
+                                        case "e":
+                                            System.out.println("Generate report based on:");
+                                            String report = input.next();
+                                            adminMenu.generateReports(report);
+                                            break;
+        
+                                        case "f":
+                                            System.out.println("Exiting Admin Menu...");
+                                            break;
+        
+                                        default:
+                                            System.out.println("Invalid choice.");
+                                            break;
+                                    }
+                                    if (adminChoice.equals("f")) {
+                                        break;
+                                    }
+                                }
                                 break;
-            
-                            case "b":
-                                System.out.println("\nEnter food title to search: ");
-                                String searchTitle = input.next();
-                                adminMenu.searchFood(searchTitle);
-                                break;
-                                
-                            case "c":
-                                System.out.print("\nEnter title of the food to delete: ");
-                                String deleteTitle = input.next();
-                                adminMenu.deleteFood(deleteTitle);
-                                break;
-            
-                            case "d":
-                                int foodCount = adminMenu.checkFood();
-                                System.out.println("Number of food varieties: " + foodCount);
-                                System.out.println();
-                                break;
+        
+                            //if user choice was 2. User
+                            case 2:
+                                while (true) {
+                                    System.out.println("User Menu:");
+                                    System.out.println("a. Inquire/Get food information");
+                                    System.out.println("b. Request for a new variety of food");
+                                    System.out.println("c. Raise a complaint about the non-availability of a food");
+                                    System.out.println("d. Exit User Menu");
+                                    System.out.println();
+        
+                                    String userChoice = input.next();
+        
+                                    switch (userChoice) {
+                                        case "a":
 
-                            case "e":
-                                System.out.println("Generate report based on:");
-                                String report = input.next();
-                                adminMenu.generateReports(report);
-                                break;                            
-                            }
-                        break;
-            
-                    //if user choice was 2. User
-                    case 2:
-                        System.out.println("User Menu:");
-                        System.out.println("a. Inquire/Get food information");
-                        System.out.println("b. Request for a new variety of food");
-                        System.out.println("c. Raise a complain about the non-availability of a food");
-            
-                        String user = input.next();
-            
-                        switch (user) {
-                            case "a":
-
-                            break;
-            
-                            case "b":
-                                userMenu.requestFood(input);
+                                            break;
+        
+                                        case "b":
+                                            userMenu.requestFood(input);
+                                            break;
+        
+                                        case "c":
+                                            userMenu.foodComplaint(input);
+                                            break;
+        
+                                        case "d":
+                                            System.out.println("Exiting User Menu...");
+                                            break;
+        
+                                        default:
+                                            System.out.println("Invalid choice.");
+                                            break;
+                                    }
+                                    if (userChoice.equals("d")) {
+                                        break;
+                                    }
+                                }
                                 break;
-            
-                            case "c":
-                                userMenu.foodComplaint(input);
+        
+                            //if user choice was 3. Exit
+                            case 3:
+                                System.out.println("Exiting menu...");
+                                System.exit(0);
                                 break;
-            
-                            case "d":
-                                break;
-            
+        
                             default:
                                 System.out.println("Invalid choice.");
                                 break;
+                            }
                         }
-                    break;
-            
-                    case 3:
-                        System.out.println("Exiting menu...");
-                        System.exit(0);
-                        break;
-            
-                    default:
-                        System.out.println("Invalid choice.");
-                        break;
+                    }
                 }
             }
         }
-    }
-}
