@@ -68,7 +68,7 @@ class admin{
         //to check if the food item is in the head of the menu or not
         if(head.title.equals(title)){
             head = head.next;
-            System.out.println("\n" + title + " was successfully deleted from the menu.");
+            System.out.println("\n" + title + " was successfully deleted from the menu.\n");
             return;
         }
 
@@ -79,7 +79,6 @@ class admin{
         while(current != null && !current.title.equals(title)){
             previous = current; //storing the reference variable to the previous item on the menu
             current = current.next; //moving to the next item on the menu
-            //System.out.println("\n" + title + " was successfully removed from the menu.\n");
         }
 
         //displaying a message to indicate if the food was not found
@@ -114,21 +113,21 @@ class admin{
             //switch case to handle reports based on the given type
             switch(reportType){
                 case "title":
-                System.out.println("Title: " + temp.title);
+                System.out.println("Title: " + temp.title + "\n");
                 break;
 
                 case "country":
                 System.out.println("Title: " + temp.title);
-                System.out.println("Country of origin: " + temp.countryOfOrigin);
+                System.out.println("Country of origin: " + temp.countryOfOrigin + "\n");
                 break;
 
                 case "info":
                 System.out.println("Title: " + temp.title);
-                System.out.println("Info: " + temp.info);
+                System.out.println("Info: " + temp.info + "\n");
                 break;
 
                 default:
-                System.out.println("Invalid report type");
+                System.out.println("Invalid report type\n");
                 return;
             }
 
@@ -229,6 +228,7 @@ public class cafeCatalog {
                             case "d":
                                 int foodCount = adminMenu.checkFood();
                                 System.out.println("Number of food varieties: " + foodCount);
+                                System.out.println();
                                 break;
 
                             case "e":
