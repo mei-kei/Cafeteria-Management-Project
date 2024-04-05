@@ -48,7 +48,7 @@ class admin{
         }
         current = current.next;
     }
-    System.out.println(title + "not found.");
+    System.out.println(title + " not found.\n");
     }
 
     //method to delete food item from the menu
@@ -203,12 +203,12 @@ public class cafeCatalog {
             
                             case "a":
                             System.out.println("Enter food title: ");
-                            String title = input.next();
-                            System.out.println("Enter country of origin: ");
-                            String country = input.next();
-                            System.out.println("Enter additional info: ");
-                            String info = input.next();
-                            adminMenu.addFood(title, country, info);
+                                String title = input.next();
+                                System.out.println("Enter country of origin: ");
+                                String country = input.next();
+                                System.out.println("Enter additional info: ");
+                                String info = input.next();
+                                adminMenu.addFood(title, country, info);
                                 break;
             
                             case "b":
