@@ -33,22 +33,21 @@ class admin{
         
     }
 
-    void searchFood(String title, String countryOfOrigin, String info){
+    void searchFood(String title){
        Food current = head;
-            System.out.println("Enter the name of food ,or it's country of origin ,or it's info you are looking for: " + keyword);
+            System.out.println("Enter the name of food ,or it's country of origin ,or it's info you are looking for: " + title);
             while (current != null) {
-                if (current.Food.title()= title ||
-                        current.Food.countryOfOrigin()=countryOfOrigin ||
-                        current.Food.info()= info {
-                    //System.out.println(current.food);
-                    return ("Food title :"+title+"Food country of origin "+countryOfOrigin+ "Food info :"+info);
+                if (current.title.equals(title) ||
+                current.countryOfOrigin.equals(current.countryOfOrigin)||
+                current.info.equals(current.info)) {
+                    System.out.println("Title: " + title);
+                    System.out.println("Country of Origin: " + current.countryOfOrigin);
+                    System.out.println("Info: " + current.info);
                 }
                 current = current.next;
             }
-            return (" This Food Item is not available ") ;
+            System.out.println(title + "not found.");
         }
-
-    }
 
     //method to delete food item from the menu
     void deleteFood(String title){
@@ -201,13 +200,13 @@ public class cafeCatalog {
                         switch (admin) {
             
                             case "a":
-
+                            
                                 break;
             
                             case "b":
                                 System.out.println("\nEnter food title to search: ");
                                 String searchTitle = input.next();
-                                //adminMenu.searchFood(searchTitle);
+                                adminMenu.searchFood(searchTitle);
                                 break;
                                 
                             case "c":
