@@ -154,7 +154,7 @@ class user extends admin{
         System.out.println(" Enter the food's country of origin: ");
         String country = input.next();
         System.out.println(" Enter the food's info : ");
-        String info = input.next();
+        String info = input.nextLine();
         System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");
     }
 
@@ -225,7 +225,7 @@ public class cafeCatalog {
                             
                             case "e":
                             System.out.println("Generate report based on:");
-                            String report = input.next();
+                            String report = input.nextLine();
                             adminMenu.generateReports(report);
                             break;
                             
