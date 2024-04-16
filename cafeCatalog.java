@@ -108,8 +108,30 @@ class admin{
     }
 
     //method to add new food and its information on the menu (munira)
-    void addFood(String fileName) {
-        
+    void addFood(String title, String country, String info, String fileName) {
+        //implementing a counter
+        foodCount++;
+
+        //creating an object for the new food
+        Food newFood = new Food(title, country, info);
+
+        //adding the food details to the item using a help method
+        addItemToFile(title, country, info, fileName);
+        System.out.println("\nFood item has been successfully added to the file menu.");
+    }
+
+    //help method for addFood() to write the new food item into the text file
+    void addItemToFile(String title, String country, String info, String fileName){
+        try(FileWriter writer = new FileWriter(fileName, true)){
+            writer.write("\nItem #" + foodCount + "\n");
+            writer.write("-------------------------\n");
+            writer.write("Title: " + title + "\n");
+            writer.write("Country of Origin: " + country + "\n");
+            writer.write("Info: " + info + "\n");
+        } catch(IOException e){
+            System.out.println("An error occurred while adding the food item to the file menu.");
+            System.out.println("Error: " + e);
+        }
     }
     
     //method to inquire about the specific food including the information
@@ -465,7 +487,7 @@ public class cafeCatalog {
                             String country = input.next();
                             System.out.println("Enter additional info: ");
                             String info = input.next();
-                            adminMenu.addFood(filename);                            
+                            adminMenu.addFood(title, country, info, filename);                            
                             break;
         
                             //calling the searchFood method
