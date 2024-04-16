@@ -80,10 +80,7 @@ class admin{
 
     //method to add new food and its information on the menu (munira)
     void addFood(String title, String countryOfOrigin, String info){
-        foodCount++;
-
-        String item = title + " " + foodCount;
-        Food newFood = new Food(item, countryOfOrigin, info);
+        Food newFood = new Food(title, countryOfOrigin, info);
 
         if(head == null){
             head = newFood;
@@ -95,7 +92,9 @@ class admin{
         temp.next = newFood;
         }
         System.out.println("\nFood item has successfully been added to the menu.\n");
+        
         addToFile("menu.txt");
+        foodCount++;
     }
 
     //method to inquire about the specific food including the information (munira)
