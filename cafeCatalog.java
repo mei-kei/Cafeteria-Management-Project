@@ -88,49 +88,8 @@ class admin{
     }
 
     //method to add new food and its information on the menu (munira)
-    void addFood(String fileName) {
-        try {
-            File file = new File(fileName);
-            boolean exist = file.exists();
-    
-            FileWriter writer = new FileWriter(fileName, true);
-    
-            if (!exist) {
-                System.out.println("The entered file doesn't exist.\n");
-                System.out.println("Would you like to create a new one? (Y/N)");
-    
-                Scanner input = new Scanner(System.in);
-                String newFile = input.nextLine();
-    
-                if (newFile.equalsIgnoreCase("y") || newFile.equalsIgnoreCase("yes")) {
-                    file.createNewFile();
-                    System.out.println("File '" + fileName + "' has been created successfully.");
-                } else {
-                    System.out.println("There was an error creating the file.");
-                    return;
-                }
-            }
-    
-            int itemNumber = exist ? itemInFile(fileName) + 1 : 1;
-    
-            Food temp = head;
-    
-            while (temp != null) {
-                writer.write("\nItem #" + itemNumber + "\n");
-                writer.write("-------------------------\n");
-                writer.write("Title: " + temp.title + "\n");
-                writer.write("Country of Origin: " + temp.countryOfOrigin + "\n");
-                writer.write("Info: " + temp.info + "\n");
-                temp = temp.next;
-                itemNumber++;
-            }
-    
-            writer.close();
-
-        } catch (IOException e) {
-            System.out.println("An error occurred while adding item to file.");
-            System.out.println("\nError: " + e);
-        }
+    void addFood() {
+        
     }
     
     //the following is a help method to save the data added/deleted by the admin
@@ -191,14 +150,26 @@ class admin{
 }
 
     //method to request for a new food item (maryam)
-    void requestFood(Scanner input){
+    void requestFood(Scanner input, String fileName){
+        try(FileWriter writer = new FileWriter(fileName, true)){
         System.out.println(" Enter the title of food you want to request");
         String title =input.next();
         System.out.println(" Enter the food's country of origin: ");
         String country = input.next();
         System.out.println(" Enter the food's info : ");
         String info = input.nextLine();
-        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");
+        
+        writer.write("\nRequested Food\n");
+        writer.write("------------------");
+        writer.write("Title: " + title + "\n");
+        writer.write("Country of Origin: " + country + "\n");
+        writer.write("Info: " + info + "\n");
+
+        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");        
+        } catch(IOException e){
+            System.out.println("An error occurred while adding your request to the file.");
+            System.out.println("Error: " + e);
+        }
     }
 
     //method to update the requests or new requirements from the faculty or the students
@@ -363,10 +334,8 @@ class admin{
                     System.out.println(line.substring(line.indexOf(":") + 2));
                 } else if (line.startsWith("Info:") && reportType.equals("info")) {
                     System.out.println(line.substring(line.indexOf(":") + 2));
-                } else if (line.startsWith("Complaint:") && reportType.equals("complaint")) {
-                    System.out.println(line.substring(line.indexOf(":") + 2));
-                } else if (line.isEmpty() && foodLine) {
-                    foodLine = false; // Reset the flag at the end of each item
+                }else if (line.isEmpty() && foodLine) {
+                    foodLine = false; 
                 }
             }
         } catch (IOException e) {
@@ -387,13 +356,6 @@ class admin{
 
             case "info":
             System.out.println("Info: " + food.info);
-            break;
-
-            case "complaints":
-            System.out.println("Complaints: ");
-            for(String complaint: food.complaints){
-                System.out.println(": " + complaint);
-            }
             break;
 
             default:
