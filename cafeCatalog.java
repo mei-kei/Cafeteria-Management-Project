@@ -134,42 +134,47 @@ class admin{
                     if(title.equalsIgnoreCase(searchTitle)){
                         found = true;
 
-                        sout
+                        System.out.println("Food found: ");
+                        System.out.printlin("Title: " + title);
+
+                        //reading the rest of the lines i.e. country of origin and info and prints them
+                        for (int i = 0; i < 2; i++) {
+                            line = reader.readLine();
+                            System.out.println(line);
+                        }
+                        break;
                     }
                 }
+                line = reader.readLine();
             }
-        }
-        Food temp = head;
-        while (temp != null) {
-            if (temp.title.equalsIgnoreCase(searchTitle)) {
-                System.out.println("Food found:");
-                System.out.println("Title: " + temp.title);
-                System.out.println("Country of Origin: " + temp.countryOfOrigin);
-                System.out.println("Info: " + temp.info);
-                return;
+            
+            if(!found){
+                System.out.println("Food not found.");
             }
-            temp = temp.next;
+        } catch(IOException e){
+            System.out.println("An error has occurred while reading the file menu.")
+            System.out.println("Error: " + e);
         }
-        System.out.println("Food not found.");
     }
 
-     //method to request for a new food item (maryam)
-    void requestFood(Scanner input, String fileName){
+     //method to request for a new food item
+     void requestFood(Scanner input, String fileName){
         try(FileWriter writer = new FileWriter(fileName, true)){
-        System.out.println(" Enter the title of food you want to request");
-        String title =input.next();
-        System.out.println(" Enter the food's country of origin: ");
-        String country = input.next();
-        System.out.println(" Enter the food's info: ");
-        String info = input.nextLine();
-        
-        writer.write("\nRequested Food\n");
-        writer.write("------------------");
-        writer.write("Title: " + title + "\n");
-        writer.write("Country of Origin: " + country + "\n");
-        writer.write("Info: " + info + "\n");
+            System.out.println(" Enter the title of food you want to request");
+            String title =input.next();
+            System.out.println(" Enter the food's country of origin: ");
+            String country = input.next();
+            input.nextLine(); // Consume newline
+            System.out.println(" Enter the food's info: ");
+            String info = input.nextLine();
+            
+            writer.write("\nRequested Food\n");
+            writer.write("------------------\n");
+            writer.write("Title: " + title + "\n");
+            writer.write("Country of Origin: " + country + "\n");
+            writer.write("Info: " + info + "\n");
 
-        System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");        
+            System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");        
         } catch(IOException e){
             System.out.println("An error occurred while adding your request to the file.");
             System.out.println("Error: " + e);
@@ -211,10 +216,11 @@ class admin{
                     writer.write(newRequest + "\n");
                     updated = true;
                 } else if(line.isEmpty() && foodInLine){
-                    foodInLine = true;
+                    foodInLine = false;
                 }
 
                 writer.write(line + "\n");
+                line = reader.readLine(); // Read the next line
             }
 
             reader.close();
@@ -228,20 +234,20 @@ class admin{
         } catch(IOException e){
             System.out.println("An error occurred while updating your requests.");
             System.out.println("Error: " + e);
-        }
+        }//method to file a complaint if any
     }
-
-   //method to file a complaint if any
+    
     void foodComplaint(Scanner input, String title, String fileName){
         System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
         String complaint = input.nextLine();
 
         try(FileWriter writer = new FileWriter(fileName, true)){
-            writer.write("/nComplaint for: " + title + "\n");
+            writer.write("\nComplaint for: " + title + "\n");
             writer.write("Complaint: " + complaint + "\n");
-            writer.write("------------------------------");
-
+            writer.write("------------------------------\n");
+            
             System.out.println("Your complaint has been registered.");
+        
         } catch(IOException e){
             System.out.println("An error occurred while submitting your complaint.");
             System.out.println("Error: " + e);
@@ -315,11 +321,11 @@ class admin{
     public int checkFood(String fileName) {
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             //to process each line in the file
-            String line = reader.readLine();
+            String line;
             int count = 0;
             
             System.out.println("Displaying food varieties...");
-            while(line != null){
+            while((line = reader.readLine()) != null){
                 if(line.startsWith("Title: ")){
 
                     // +2 so that the extracted substring starts from the actual value after the colon
@@ -347,11 +353,10 @@ class admin{
     void generateReport(String reportType, String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             //to process each line in the file 
-            String line = reader.readLine();
-            //use of boolean to indicate if the current line represents the specific food information
+            String line;
             boolean foodLine = false;
     
-            while (line != null) {
+            while ((line = reader.readLine()) != null) {
                 if (line.startsWith("Title:") && reportType.equals("title")) {
                     System.out.println(line.substring(line.indexOf(":") + 2));
                     foodLine = true;
@@ -387,7 +392,7 @@ class admin{
             default:
             System.out.println("Invalid report type.");
         }
-    }    
+    }
 }
 
 //class user extends admin as the user class utilises certain functions from admin class (manhah)
@@ -424,6 +429,7 @@ public class cafeCatalog {
             String filename = input.nextLine();
 
             adminMenu.addToFile(filename);
+            studentMenu.addToFile(filename);
 
             while (true) {
                 System.out.println("Please select the user: ");
@@ -505,15 +511,14 @@ public class cafeCatalog {
                             
                             //calling the checkFood method
                             case "h":
-                            int foodCount = adminMenu.checkFood(filename);
-                            System.out.println("Number of food varieties: " + foodCount + "\n");                            
+                            adminMenu.checkFood(filename);                         
                             break;
                             
                             //calling the generateReport method
                             case "i":
-                            System.out.println("Generate report based on:");
+                            System.out.println("Enter the type of report to generate: ");
                             String report = input.next();
-                            adminMenu.generateReport(report, admin);
+                            adminMenu.generateReport(report, filename);
                             break;
                             
                             case "j":
@@ -536,30 +541,44 @@ public class cafeCatalog {
                         System.out.println("a. Inquire regarding a food item");
                         System.out.println("b. Request for a new variety of food");
                         System.out.println("c. Raise a complaint about the non-availability of a food");
-                        System.out.println("d. Exit Student Menu");
+                        System.out.println("d. Search food on the menu");
+                        System.out.println("e. Check the number of food varieties")
+                        System.out.println("f. Exit Student Menu");
                         System.out.println();
         
                         String student = input.next();
                         
                         switch (student) {
-                            //calling the inquireFood method
+                            //calling the inquireFood() method
                             case "a":
                             studentMenu.inquireFood(filename);
                             break;
                             
-                            //calling the request method
+                            //calling the foodRequest() method
                             case "b":
-                            System.out.println("Enter the file name to store the request: ");
-                            String fileName = input.nextLine();
-                            studentMenu.requestFood(input, fileName);
+                            studentMenu.requestFood(input, filename);
                             break;
         
-                            //calling the complain method
+                            //calling the foodComplain() method
                             case "c":
-                            studentMenu.foodComplaint(input);
+                            System.out.println("Enter the title of the food to complain about: ");
+                            String titleToComplain = input.next();
+                            studentMenu.foodComplaint(input, titleToComplain, filename);
+                            break;
+
+                            //calling the searchFood() method
+                            case "d":
+                            System.out.println("Enter the title of the food to search: ");
+                            String searchTitle = input.next();
+                            studentMenu.searchFood(searchTitle);
+                            break;
+
+                            //calling the checkFood method
+                            case "e":
+                            studentMenu.checkFood(filename);
                             break;
         
-                            case "d":
+                            case "f":
                             System.out.println("Exiting Student Menu...");
                             break;
         
@@ -568,7 +587,7 @@ public class cafeCatalog {
                             break;
                         }
                         
-                        if (student.equals("d")) {
+                        if (student.equals("f")) {
                             break;
                         }
                     break;
