@@ -499,7 +499,7 @@ public class cafeCatalog {
                         String admin = input.next();
                         
                         switch (admin) {
-                            //calling the addFood method (munira)
+                            //calling the addFood method
                             case "a":
                             System.out.println("Enter food title: ");
                             String title = input.next();
@@ -510,7 +510,7 @@ public class cafeCatalog {
                             adminMenu.addFood(filename);                            
                             break;
         
-                            //calling the searchFood method (maryam)
+                            //calling the searchFood method
                             case "b":
                             System.out.println("\nEnter food title to search: ");
                             String searchTitle = input.next();
@@ -546,7 +546,7 @@ public class cafeCatalog {
                             adminMenu.updateRequests(filename, input);
                             break;
                             
-                            //calling the checkFood method (furat)
+                            //calling the checkFood method
                             case "e":
                             int foodCount = adminMenu.checkFood(filename);
                             System.out.println("Number of food varieties: " + foodCount + "\n");                            
@@ -585,19 +585,19 @@ public class cafeCatalog {
                         String student = input.next();
                         
                         switch (student) {
-                            //calling the inquireFood method (munira)
+                            //calling the inquireFood method
                             case "a":
                             studentMenu.inquireFood(filename);
                             break;
                             
-                            //calling the request method (maryam)
+                            //calling the request method
                             case "b":
                             System.out.println("Enter the file name to store the request: ");
                             String fileName = input.nextLine();
                             studentMenu.requestFood(input, fileName);
                             break;
         
-                            //calling the complain method (manhah)
+                            //calling the complain method
                             case "c":
                             studentMenu.foodComplaint(input);
                             break;
