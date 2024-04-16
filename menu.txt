@@ -1,18 +1,12 @@
 
 Item #1
 -------------------------
-Title: pizza
-Country of Origin: italy
-Info: none
-
-Item #2
--------------------------
 Title: noodles
 Country of Origin: china
 Info: none
 
-Item #3
+Item #2
 -------------------------
-Title: fries
-Country of Origin: belgium
+Title: pizza
+Country of Origin: italy
 Info: none
