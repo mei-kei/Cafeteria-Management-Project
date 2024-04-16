@@ -86,26 +86,26 @@ class admin{
             System.out.println("Error: " + e);
         }
     }
-
-        //the following is a help method to save the data added/deleted by the admin in a text file
-        private int itemInFile(String fileName) {
-            int count = 0;
     
-            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-                //to process each line in the file
-                String line = reader.readLine();
+    //method to determine the number of items in the text file (specifically a help method for addFood())
+    private int itemInFile(String fileName) {
+        int count = 0;
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            //to process each line in the file
+            String line = reader.readLine();
 
-                while (line != null) {
-                    if (line.startsWith("Item #")) {
-                        count++;
-                    }
+            while (line != null) {
+                if (line.startsWith("Item #")) {
+                    count++;
                 }
-            } catch (IOException e) {
-                System.out.println("An error occurred while counting items in file.");
-                System.out.println("\nError: " + e);
             }
-            return count;
+        } catch (IOException e) {
+            System.out.println("An error occurred while counting items in file.");
+            System.out.println("\nError: " + e);
         }
+        return count;
+    }
 
     //method to add new food and its information on the menu (munira)
     void addFood(String fileName) {
@@ -154,7 +154,7 @@ class admin{
         }
     }
     
-    //method to inquire about the specific food including the information (manhah)
+    //method to inquire about the specific food including the information
     void inquireFood(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             Scanner input = new Scanner(System.in);
@@ -273,7 +273,7 @@ class admin{
         }
     }
 
-    //method to file a complaint if any (manhah)
+    //method to file a complaint if any
     void foodComplaint(Scanner input, String title, String fileName){
         System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
         String complaint = input.nextLine();
@@ -290,7 +290,7 @@ class admin{
         }
     }
 
-    //method to search for a food item on the menu (maryam)
+    //method to search for a food item on the menu
     Food searchFood(String title){
         Food current = head;
         while (current != null) {
