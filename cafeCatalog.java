@@ -7,6 +7,9 @@
                   Munira Altheeb - 202200822
  */
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class Food{
     String title;
@@ -35,9 +38,21 @@ class admin{
     }
 
     //method to add new food and its information on the menu (munira)
-    void addFood(){
-
+    void addFood(String title, String countryOfOrigin, String info){
+        Food newFood = new Food(title, countryOfOrigin, info);
+        if(head == null){
+            head = newFood;
+        } else {
+            Food temp = head;
+            while(temp.next != null){
+                temp = temp.next;
+        }
+        temp.next = newFood;
+        }
+        System.out.println("\nFood added successfully.\n");
+        addToFile("menu.txt");
     }
+
     //method to inquire about the specific food including the information (munira)
     void inquireFood(){
 
@@ -94,6 +109,7 @@ class admin{
         if(head.title.equals(title)){
             head = head.next;
             System.out.println("\n" + title + " was successfully deleted from the menu.\n");
+            addToFile("menu.txt");
             return;
         }
 
@@ -165,6 +181,42 @@ class admin{
             temp = temp.next;
         }
     }
+
+    void addToFile(String fileName){
+        try{
+            File file = new File(fileName);
+            if(!file.exists()){
+                System.out.println("The file '" + fileName + "' doesn't exist.\n");
+                System.out.println("Create new file? (Y/N)");
+
+                Scanner input = new Scanner(System.in);
+                String newFile = input.nextLine();
+
+                if (newFile.equalsIgnoreCase("y") || newFile.equalsIgnoreCase("yes")){
+                    file.createNewFile();
+                    System.out.println("File '" + fileName + "' created successfully.");
+                } else{
+                    System.out.println("Failed to create file. Exiting...");
+                    return;
+                }
+            }
+
+            FileWriter writer = new FileWriter(fileName);
+            Food temp = head;
+
+            while(temp != null){
+                writer.write("Title: " + temp.title + "\n");
+                writer.write("Country of Origin: " + temp.countryOfOrigin + "\n");
+                writer.write("Info: " + temp.info + "\n");
+                temp = temp.next;
+            }
+
+            writer.close();
+        } catch(IOException e){
+            System.out.println("An error has occured while writing to the file.");
+            System.out.println("Error: " + e);
+        }
+    }
 }
 
 //class user extends admin as the user class utilises certain functions from admin class (manhah)
@@ -191,6 +243,11 @@ public class cafeCatalog {
         try (Scanner input = new Scanner(System.in)) {
             admin adminMenu = new admin();
             user userMenu = new user();
+
+            System.out.println("Enter the file name to create or use for storing the menu: ");
+            String filename = input.nextLine();
+
+            adminMenu.addToFile(filename);
 
             while (true) {
                 System.out.println("Please select the user: ");
@@ -222,12 +279,20 @@ public class cafeCatalog {
                         switch (admin) {
                             //calling the addFood method (munira)
                             case "a":
-
+                            System.out.println("Enter food title: ");
+                            String title = input.next();
+                            System.out.println("Enter country of origin: ");
+                            String country = input.next();
+                            System.out.println("Enter additional info: ");
+                            String info = input.next();
+                            adminMenu.addFood(title, country, info);                            
                             break;
         
                             //calling the searchFood method (maryam)
                             case "b":
-
+                            System.out.println("\nEnter food title to search: ");
+                            String searchTitle = input.next();
+                            adminMenu.searchFood(searchTitle);                            
                             break;
                             
                             //calling the deleteFood method
@@ -244,7 +309,8 @@ public class cafeCatalog {
                             
                             //calling the checkFood method (furat)
                             case "e":
-
+                            int foodCount = adminMenu.checkFood();
+                            System.out.println("Number of food varieties: " + foodCount + "\n");                            
                             break;
                             
                             //calling the generateReport method
