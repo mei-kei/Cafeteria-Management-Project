@@ -217,7 +217,38 @@ class admin{
             String newRequest = input.nextLine();
 
             File tempFile = new File("temp.txt");
-            BufferedReader
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String line;
+            boolean foodInLine = false;
+            boolean updated = false;
+
+            while((line = reader.readLine()) != null){
+                if(line.startsWith("Title: ") && line.substring(line.indexOf(":") + 2).equals(foodItem)){
+                    foodInLine = true;
+                } else if(line.startsWith("Request: ") && foodInLine){
+                    writer.write(line + "\n");
+                    writer.write(newRequest + "\n");
+                    updated = true;
+                } else if(line.isEmpty() && foodInLine){
+                    foodInLine = true;
+                }
+
+                writer.write(line + "\n");
+            }
+
+            reader.close();
+            writer.close();
+
+            if(!updated){
+                System.out.println("Food item: " + foodItem + ", not found.");
+                tempFile.delete();
+            }
+            System.out.println("Requests updated successfully for '" + foodItem + "'");
+        } catch(IOException e){
+            System.out.println("An error occurred while updating your requests.");
+            System.out.println("Error: " + e);
         }
     }
 
