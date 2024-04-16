@@ -564,7 +564,7 @@ public class cafeCatalog {
                         }
                     break;
                     
-                    //if user choice was 2. Student
+                    //if user choice is 2. Student
                     case 2:
                         System.out.println("Student Menu:");
                         System.out.println("a. Inquire regarding a food item");
@@ -607,7 +607,7 @@ public class cafeCatalog {
                         }
                     break;
 
-                    //if user choice was 3. Exit
+                    //if user choice is 3. Exit
                     case 3:
                     System.out.println("Exiting menu...");
                     System.exit(0);
