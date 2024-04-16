@@ -109,49 +109,7 @@ class admin{
 
     //method to add new food and its information on the menu (munira)
     void addFood(String fileName) {
-        try {
-            File file = new File(fileName);
-            boolean exist = file.exists();
-    
-            FileWriter writer = new FileWriter(fileName, true);
-    
-            if (!exist) {
-                System.out.println("The entered file doesn't exist.\n");
-                System.out.println("Would you like to create a new one? (Y/N)");
-    
-                Scanner input = new Scanner(System.in);
-                String newFile = input.nextLine();
-    
-                if (newFile.equalsIgnoreCase("y") || newFile.equalsIgnoreCase("yes")) {
-                    file.createNewFile();
-                    System.out.println("File '" + fileName + "' has been created successfully.");
-                } else {
-                    System.out.println("There was an error creating the file.");
-                    return;
-                }
-            }
-    
-            /*adding a conditional operator to calculate the itemNumber based on whether the file exists or not. if it does, it counts the existing item and increments by 1*/
-            int itemNumber = exist ? itemInFile(fileName) + 1 : 1;
-    
-            Food temp = head;
-    
-            while (temp != null) {
-                writer.write("\nItem #" + itemNumber + "\n");
-                writer.write("-------------------------\n");
-                writer.write("Title: " + temp.title + "\n");
-                writer.write("Country of Origin: " + temp.countryOfOrigin + "\n");
-                writer.write("Info: " + temp.info + "\n");
-                temp = temp.next;
-                itemNumber++;
-            }
-    
-            writer.close();
-
-        } catch (IOException e) {
-            System.out.println("An error occurred while adding item to file.");
-            System.out.println("\nError: " + e);
-        }
+        
     }
     
     //method to inquire about the specific food including the information
