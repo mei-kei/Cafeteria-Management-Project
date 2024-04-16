@@ -255,20 +255,38 @@ class admin{
     }
 
     //method to search for a food item on the menu
-    Food searchFood(String title){
-        Food current = head;
-        while (current != null) {
-            if (current.title.equals(title)){
-                System.out.println("Title: " + current.title);
-                System.out.println("Country of Origin: " + current.countryOfOrigin);
-                System.out.println("Info: " + current.info + "\n");
-                return current;
+void searchFood(String fileName, String title) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        //to process each line in the file
+        String line;
+        boolean found = false;
+
+        System.out.println("Searching for food item: " + title + "...");
+
+        while ((line = reader.readLine()) != null) {
+            if (line.startsWith("Title: ")) {
+                String itemTitle = line.substring(line.indexOf(":") + 2);
+                if (itemTitle.equalsIgnoreCase(title)) {
+                    found = true;
+                    System.out.println("Food found:");
+                    System.out.println(line);
+
+                    //for loop to print the next two lines after the title
+                    for (int i = 0; i < 2; i++) {
+                        System.out.println(reader.readLine());
+                    }
+                    break;
+                }
             }
-            current = current.next;
         }
-        System.out.println(title + " not found.\n");
-        return null;
+        if (!found) {
+            System.out.println("Food not found.");
+        }
+    } catch (IOException e) {
+        System.out.println("An error occurred while searching for the food item.");
+        System.out.println("Error: " + e);
     }
+}
 
     //method to delete food item from the menu (manhah)
     void deleteFood(String title, String fileName) {
@@ -416,6 +434,24 @@ class user extends admin{
 
         System.out.println("Your complaint has been registered successfully.");
     }
+
+    //implementing the same method to search for existing food items on the menu
+    @Override
+    Food searchFood(String title) {
+        Food result = super.searchFood(title);
+        if (result == null) {
+            System.out.println("Food not found. Please ask the admin for assistance.");
+        }
+        return result;
+    }
+
+    //implementing the same method to check for existing food varieties on the menu
+    @Override
+    public int checkFood(String fileName) {
+        int count = super.checkFood(fileName);
+        System.out.println("You have access to " + count + " food varieties.");
+        return count;
+    }
 }
 
 //a main method to run the catalog menu for both the admin and the user (manhah)
@@ -506,7 +542,7 @@ public class cafeCatalog {
                             case "g":
                             System.out.println("\nEnter food title to search: ");
                             String searchTitle = input.next();
-                            adminMenu.searchFood(searchTitle);                            
+                            adminMenu.searchFood(filename, searchTitle);
                             break;
                             
                             //calling the checkFood method
@@ -568,9 +604,10 @@ public class cafeCatalog {
 
                             //calling the searchFood() method
                             case "d":
-                            System.out.println("Enter the title of the food to search: ");
+                            System.out.println("\nEnter food title to search: ");
                             String searchTitle = input.next();
                             studentMenu.searchFood(searchTitle);
+                            break;
                             break;
 
                             //calling the checkFood method
