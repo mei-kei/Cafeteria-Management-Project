@@ -92,6 +92,7 @@ class admin{
             int count = 0;
     
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+                //to process each line in the file
                 String line = reader.readLine();
 
                 while (line != null) {
@@ -130,7 +131,7 @@ class admin{
                 }
             }
     
-            /*adding a conditional operator to calculate the itemNumber based on whether the file exists or not. if it does, counts the existing item(s) and increments by 1*/
+            /*adding a conditional operator to calculate the itemNumber based on whether the file exists or not. if it does, it counts the existing item and increments by 1*/
             int itemNumber = exist ? itemInFile(fileName) + 1 : 1;
     
             Food temp = head;
@@ -157,8 +158,9 @@ class admin{
     void inquireFood(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             Scanner input = new Scanner(System.in);
-            String line = reader.readLine();
 
+            //to process each line in the file
+            String line = reader.readLine();
             boolean found = false;
 
             System.out.print("Enter the title of the food to inquire about: ");
@@ -200,7 +202,7 @@ class admin{
         String title =input.next();
         System.out.println(" Enter the food's country of origin: ");
         String country = input.next();
-        System.out.println(" Enter the food's info : ");
+        System.out.println(" Enter the food's info: ");
         String info = input.nextLine();
         
         writer.write("\nRequested Food\n");
@@ -233,10 +235,14 @@ class admin{
 
             File tempFile = new File("temp.txt");
             BufferedReader reader = new BufferedReader(new FileReader(file));
+            //creating a temporary file to store the modified contents of the original file while updating the requests
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
+            //to process each line in the file
             String line = reader.readLine();
+            //to track whether the current line being processed contains the info of the food item in the file or not
             boolean foodInLine = false;
+            //to indicate whether the requests of for the food item has been updated or not
             boolean updated = false;
 
             while(line != null){
@@ -350,6 +356,7 @@ class admin{
     //method to check the number of food varieties (furat)
     public int checkFood(String fileName) {
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+            //to process each line in the file
             String line = reader.readLine();
             int count = 0;
             
@@ -383,6 +390,7 @@ class admin{
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             //to process each line in the file 
             String line = reader.readLine();
+            //use of boolean to indicate if the current line represents the specific food information
             boolean foodLine = false;
     
             while (line != null) {
@@ -403,6 +411,7 @@ class admin{
         }
     }
     
+    //method to display specific information of a food item (generateReport)
     void foodInfo(Food food, String reportType){
         switch(reportType){
             case "title":
