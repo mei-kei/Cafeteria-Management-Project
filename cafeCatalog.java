@@ -301,13 +301,13 @@ class admin{
     }
 
     //method to delete food item from the menu (manhah)
-    void deleteFood(String title) {
+    void deleteFood(String title, String fileName) {
         //using boolean to indicate whether the food item was found and deleted or not
         boolean deleted = false;
     
         //checking if the menu is empty or not
         if (head == null) {
-            System.out.println("This list is empty\n");
+            System.out.println("There are currently no food items in the menu.\n");
             return;
         }
     
@@ -319,7 +319,7 @@ class admin{
             if (current.title.equalsIgnoreCase(title)) {
                 //deleting the food item
                 if (previous == null) {
-                    //making the next item at the top of the list if the deleted item was at the head
+                    //moving the next item at the top of the list if the deleted item was the head
                     head = head.next;
                 } else {
                     previous.next = current.next;
@@ -334,9 +334,9 @@ class admin{
             current = current.next;
         }
     
-        if (deleted) {
+        if(deleted) {
             System.out.println("Food item was successfully deleted from the menu.\n");
-            updateMenuFile("menu.txt");
+            updateMenuFile(fileName);
         } else {
             System.out.println("Food not found.\n");
         }
@@ -452,7 +452,7 @@ public class cafeCatalog {
     public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
             admin adminMenu = new admin();
-            user userMenu = new user();
+            user studentMenu = new user();
 
             System.out.println("Enter the file name to create or use for storing the menu: ");
             String filename = input.nextLine();
@@ -462,7 +462,7 @@ public class cafeCatalog {
             while (true) {
                 System.out.println("Please select the user: ");
                 System.out.println("1. Administrator");
-                System.out.println("2. User");
+                System.out.println("2. Student");
                 System.out.println("3. Exit");
                 
                 int choice = input.nextInt();
@@ -473,15 +473,18 @@ public class cafeCatalog {
                     case 1:
                         System.out.println("Administrator Menu:");
                         System.out.println("a. Add new food");
-                        System.out.println("b. Search food on the menu");
-                        System.out.println("c. Delete information of the food");
+                        System.out.println("b. Inquire regarding a food item");
+                        System.out.println("c. Request for a new food item");
                         System.out.println("d. Update requests or requirements from faculty or students");
-                        System.out.println("e. Check the number of food varieties");
-                        System.out.println("f. Generate the reports of the food based on:");
+                        System.out.println("e. Raise a complaint about the non-availability of a food");
+                        System.out.println("f. Delete information of the food");
+                        System.out.println("g. Search food on the menu");
+                        System.out.println("h. Check the number of food varieties");
+                        System.out.println("i. Generate the reports of the food based on:");
                         System.out.println("\t1. Food 'Title'");
                         System.out.println("\t2. Food 'Info'");
                         System.out.println("\t3. Food 'Country'");
-                        System.out.println("g. Exit admin menu");
+                        System.out.println("j. Exit admin menu");
                         System.out.println();
                         
                         String admin = input.next();
@@ -509,14 +512,17 @@ public class cafeCatalog {
                             case "c":
                             System.out.print("\nEnter title of the food to delete: ");
                             String deleteTitle = input.next();
-                            adminMenu.deleteFood(deleteTitle);
+                            adminMenu.deleteFood(deleteTitle, filename);
                             break;
 
                             //calling the inquireFood method
+                            case "t":
+                            adminMenu.inquireFood(filename);
+                            break;
 
                             //calling the requestFood method
                             case "r":
-                            
+                            adminMenu.requestFood(input, filename);
                             break;
 
                             //calling the foodComplaint method
@@ -558,37 +564,37 @@ public class cafeCatalog {
                         }
                     break;
                     
-                    //if user choice was 2. User
+                    //if user choice was 2. Student
                     case 2:
-                        System.out.println("User Menu:");
-                        System.out.println("a. Inquire/Get food information");
+                        System.out.println("Student Menu:");
+                        System.out.println("a. Inquire regarding a food item");
                         System.out.println("b. Request for a new variety of food");
                         System.out.println("c. Raise a complaint about the non-availability of a food");
-                        System.out.println("d. Exit User Menu");
+                        System.out.println("d. Exit Student Menu");
                         System.out.println();
         
-                        String user = input.next();
+                        String student = input.next();
                         
-                        switch (user) {
+                        switch (student) {
                             //calling the inquireFood method (munira)
                             case "a":
-                            userMenu.inquireFood(filename);
+                            studentMenu.inquireFood(filename);
                             break;
                             
                             //calling the request method (maryam)
                             case "b":
                             System.out.println("Enter the file name to store the request: ");
                             String fileName = input.nextLine();
-                            userMenu.requestFood(input, fileName);
+                            studentMenu.requestFood(input, fileName);
                             break;
         
                             //calling the complain method (manhah)
                             case "c":
-                            userMenu.foodComplaint(input);
+                            studentMenu.foodComplaint(input);
                             break;
         
                             case "d":
-                            System.out.println("Exiting User Menu...");
+                            System.out.println("Exiting Student Menu...");
                             break;
         
                             default:
@@ -596,7 +602,7 @@ public class cafeCatalog {
                             break;
                         }
                         
-                        if (user.equals("d")) {
+                        if (student.equals("d")) {
                             break;
                         }
                     break;
