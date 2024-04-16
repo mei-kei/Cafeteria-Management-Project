@@ -63,7 +63,7 @@ class admin{
             Food temp = head;
 
             while(temp != null){
-                writer.write("Item #" + foodCount + "\n");
+                writer.write("\nItem #" + foodCount + "\n");
                 writer.write("-------------------------\n");
                 writer.write("Title: " + temp.title + "\n");
                 writer.write("Country of Origin: " + temp.countryOfOrigin + "\n");

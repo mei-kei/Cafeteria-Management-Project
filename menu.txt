@@ -1,4 +1,10 @@
-Item #1
--------------------------Title: Noodles 1
+Item #2
+-------------------------
+Title: Pizza 1
+Country of Origin: Italy
+Info: None
+Item #2
+-------------------------
+Title: Noodles 2
 Country of Origin: China
 Info: None
