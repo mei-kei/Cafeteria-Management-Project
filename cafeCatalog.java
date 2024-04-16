@@ -27,19 +27,64 @@ class Food{
 
 class admin{
     Food head;
+    int foodCount;
 
     String[] requests;
     int next;
 
     admin(){
         this.head = null;
+        this.foodCount = 0;
         this.requests = new String[100];
         this.next = 0;
     }
 
+    //method to save the added/deleted food by the admin
+    void addToFile(String fileName){
+        try{
+            File file = new File(fileName);
+            if(!file.exists()){
+                System.out.println("The file '" + fileName + "' doesn't exist.\n");
+                System.out.println("Create new file? (Y/N)");
+
+                Scanner input = new Scanner(System.in);
+                String newFile = input.nextLine();
+
+                if (newFile.equalsIgnoreCase("y") || newFile.equalsIgnoreCase("yes")){
+                    file.createNewFile();
+                    System.out.println("File '" + fileName + "' created successfully.\n");
+                } else{
+                    System.out.println("Failed to create file. Exiting...");
+                    return;
+                }
+            }
+
+            FileWriter writer = new FileWriter(fileName);
+            Food temp = head;
+
+            while(temp != null){
+                writer.write("Item #" + foodCount + "\n");
+                writer.write("-------------------------\n");
+                writer.write("Title: " + temp.title + "\n");
+                writer.write("Country of Origin: " + temp.countryOfOrigin + "\n");
+                writer.write("Info: " + temp.info + "\n");
+                temp = temp.next;
+            }
+
+            writer.close();
+        } catch(IOException e){
+            System.out.println("An error has occured while writing to the file.");
+            System.out.println("Error: " + e);
+        }
+    }
+
     //method to add new food and its information on the menu (munira)
     void addFood(String title, String countryOfOrigin, String info){
-        Food newFood = new Food(title, countryOfOrigin, info);
+        foodCount++;
+
+        String item = title + " " + foodCount;
+        Food newFood = new Food(item, countryOfOrigin, info);
+
         if(head == null){
             head = newFood;
         } else {
@@ -49,13 +94,13 @@ class admin{
         }
         temp.next = newFood;
         }
-        System.out.println("\nFood added successfully.\n");
+        System.out.println("\nFood item has successfully been added to the menu.\n");
         addToFile("menu.txt");
     }
 
     //method to inquire about the specific food including the information (munira)
     void inquireFood(){
-        
+
     }
     //method to request for a new food item (maryam)
     void requestFood(Scanner input){
@@ -179,42 +224,6 @@ class admin{
 
             //moving to the next item on the menu
             temp = temp.next;
-        }
-    }
-
-    void addToFile(String fileName){
-        try{
-            File file = new File(fileName);
-            if(!file.exists()){
-                System.out.println("The file '" + fileName + "' doesn't exist.\n");
-                System.out.println("Create new file? (Y/N)");
-
-                Scanner input = new Scanner(System.in);
-                String newFile = input.nextLine();
-
-                if (newFile.equalsIgnoreCase("y") || newFile.equalsIgnoreCase("yes")){
-                    file.createNewFile();
-                    System.out.println("File '" + fileName + "' created successfully.");
-                } else{
-                    System.out.println("Failed to create file. Exiting...");
-                    return;
-                }
-            }
-
-            FileWriter writer = new FileWriter(fileName);
-            Food temp = head;
-
-            while(temp != null){
-                writer.write("Title: " + temp.title + "\n");
-                writer.write("Country of Origin: " + temp.countryOfOrigin + "\n");
-                writer.write("Info: " + temp.info + "\n");
-                temp = temp.next;
-            }
-
-            writer.close();
-        } catch(IOException e){
-            System.out.println("An error has occured while writing to the file.");
-            System.out.println("Error: " + e);
         }
     }
 }
