@@ -55,7 +55,7 @@ class admin{
 
     //method to inquire about the specific food including the information (munira)
     void inquireFood(){
-
+        
     }
     //method to request for a new food item (maryam)
     void requestFood(Scanner input){
