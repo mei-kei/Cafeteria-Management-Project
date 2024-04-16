@@ -108,16 +108,19 @@ class admin{
     }
 
     //method to add new food and its information on the menu (munira)
-    void addFood(String title, String country, String info, String fileName) {
-        //implementing a counter
-        foodCount++;
-
-        //creating an object for the new food
+    void addFood(String title, String country, String info) {
         Food newFood = new Food(title, country, info);
-
-        //adding the food details to the item using a help method
-        addItemToFile(title, country, info, fileName);
-        System.out.println("\nFood item has been successfully added to the file menu.");
+        if (head == null) {
+            head = newFood;
+        } else {
+            Food temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newFood;
+        }
+        foodCount++;
+        System.out.println("Food item added successfully!");
     }
 
     //help method for addFood() to write the new food item into the text file
@@ -135,21 +138,21 @@ class admin{
     }
     
     //method to inquire about the specific food including the information
-    void inquireFood(String fileName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            Scanner input = new Scanner(System.in);
-
-            //to process each line in the file
-            String line = reader.readLine();
-            boolean found = false;
-
-            System.out.print("Enter the title of the food to inquire about: ");
-            String searchTitle = input.nextLine();
-
-            while (line != null) {
-                if (line.startsWith("Title:")) {
-                    String title = line.substring("Title: ".length());
-                    if (title.equalsIgnoreCase(searchTitle)) {
+    void inquireFood(String searchTitle) {
+        Food temp = head;
+        while (temp != null) {
+            if (temp.title.equalsIgnoreCase(searchTitle)) {
+                System.out.println("Food found:");
+                System.out.println("Title: " + temp.title);
+                System.out.println("Country of Origin: " + temp.countryOfOrigin);
+                System.out.println("Info: " + temp.info);
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Food not found.");
+    }
+}
 
                         //once the food is found, print its info
                         found = true;
