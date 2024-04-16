@@ -81,30 +81,11 @@ class admin{
             }
 
             writer.close();
+
         } catch(IOException e){
             System.out.println("An error has occured while writing to the file.");
             System.out.println("Error: " + e);
         }
-    }
-    
-    //method to determine the number of items in the text file (specifically a help method for addFood())
-    private int itemInFile(String fileName) {
-        int count = 0;
-    
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            //to process each line in the file
-            String line = reader.readLine();
-
-            while (line != null) {
-                if (line.startsWith("Item #")) {
-                    count++;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while counting items in file.");
-            System.out.println("\nError: " + e);
-        }
-        return count;
     }
 
     //method to add new food and its information on the menu (munira)
