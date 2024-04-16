@@ -489,57 +489,57 @@ public class cafeCatalog {
                             String info = input.next();
                             adminMenu.addFood(title, country, info, filename);                            
                             break;
-        
-                            //calling the searchFood method
-                            case "b":
-                            System.out.println("\nEnter food title to search: ");
-                            String searchTitle = input.next();
-                            adminMenu.searchFood(searchTitle);                            
-                            break;
-                            
-                            //calling the deleteFood method
-                            case "c":
-                            System.out.print("\nEnter title of the food to delete: ");
-                            String deleteTitle = input.next();
-                            adminMenu.deleteFood(deleteTitle, filename);
-                            break;
 
                             //calling the inquireFood method
-                            case "t":
+                            case "b":
                             adminMenu.inquireFood(filename);
                             break;
 
                             //calling the requestFood method
-                            case "r":
+                            case "c":
                             adminMenu.requestFood(input, filename);
+                            break;
+                            
+                            //calling the updateRequests method
+                            case "d":
+                            adminMenu.updateRequests(filename, input);
                             break;
 
                             //calling the foodComplaint method
-                            case "h":
+                            case "e":
                             System.out.println("Enter the title of the food to complain about: ");
                             String titleToComplain = input.next();
                             adminMenu.foodComplaint(input, titleToComplain, filename);
                             break;
 
-                            //calling the updateRequests method
-                            case "d":
-                            adminMenu.updateRequests(filename, input);
+                            //calling the deleteFood method
+                            case "f":
+                            System.out.print("\nEnter title of the food to delete: ");
+                            String deleteTitle = input.next();
+                            adminMenu.deleteFood(deleteTitle, filename);
+                            break;
+
+                            //calling the searchFood method
+                            case "g":
+                            System.out.println("\nEnter food title to search: ");
+                            String searchTitle = input.next();
+                            adminMenu.searchFood(searchTitle);                            
                             break;
                             
                             //calling the checkFood method
-                            case "e":
+                            case "h":
                             int foodCount = adminMenu.checkFood(filename);
                             System.out.println("Number of food varieties: " + foodCount + "\n");                            
                             break;
                             
                             //calling the generateReport method
-                            case "f":
+                            case "i":
                             System.out.println("Generate report based on:");
                             String report = input.next();
                             adminMenu.generateReport(report, admin);
                             break;
                             
-                            case "g":
+                            case "j":
                             System.out.println("Exiting Admin Menu...");
                             break;
                             
