@@ -40,8 +40,8 @@ class admin{
     }
 
     //method to save the added/deleted food by the admin
-    void addToFile(String fileName){
-        try{
+    void addToFile(String fileName) {
+        try {
             File file = new File(fileName);
             if(!file.exists()){
                 System.out.println("The file '" + fileName + "' doesn't exist.\n");
@@ -59,16 +59,22 @@ class admin{
                 }
             }
 
+            ///initialising added item
+            int itemNumber = 1;
+
             FileWriter writer = new FileWriter(fileName);
             Food temp = head;
 
-            while(temp != null){
-                writer.write("\nItem #" + foodCount + "\n");
+            while (temp != null) {
+                writer.write("\nItem #" + itemNumber + "\n");
                 writer.write("-------------------------\n");
                 writer.write("Title: " + temp.title + "\n");
                 writer.write("Country of Origin: " + temp.countryOfOrigin + "\n");
                 writer.write("Info: " + temp.info + "\n");
                 temp = temp.next;
+
+                //incrementing after the addition of more food items
+                itemNumber++;
             }
 
             writer.close();
@@ -79,22 +85,24 @@ class admin{
     }
 
     //method to add new food and its information on the menu (munira)
-    void addFood(String title, String countryOfOrigin, String info){
+    void addFood(String title, String countryOfOrigin, String info) {
+        // Increment the counter
+        foodCount++;
+
         Food newFood = new Food(title, countryOfOrigin, info);
 
-        if(head == null){
+        if (head == null) {
             head = newFood;
         } else {
             Food temp = head;
-            while(temp.next != null){
+            while (temp.next != null) {
                 temp = temp.next;
-        }
-        temp.next = newFood;
+            }
+            temp.next = newFood;
         }
         System.out.println("\nFood item has successfully been added to the menu.\n");
-        
-        addToFile("menu.txt");
-        foodCount++;
+
+        addToFile("menu.txt"); // Call addToFile without passing foodCount
     }
 
     //method to inquire about the specific food including the information (munira)
@@ -152,8 +160,7 @@ class admin{
         //to check if the food item is in the head of the menu or not
         if(head.title.equals(title)){
             head = head.next;
-            System.out.println("\n" + title + " was successfully deleted from the menu.\n");
-            addToFile("menu.txt");
+            foodCount--;
             return;
         }
 
@@ -173,6 +180,8 @@ class admin{
         }
         //making the next item on the menu as the top item after deletion of the previous one
         previous.next = current.next;
+        System.out.println("Food item was successfully deleted from the menu.\n");
+        foodCount--;
     }
 
     //method to check the number of food varieties (furat)
