@@ -507,7 +507,7 @@ class user extends admin{
     }
 }
 
-//a main method to run the catalog menu for both the admin and the user (manhah)
+//a main method to run the catalog menu for both the admin and the user
 public class cafeCatalog {
     public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
