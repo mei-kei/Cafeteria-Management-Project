@@ -255,38 +255,38 @@ class admin{
     }
 
     //method to search for a food item on the menu
-void searchFood(String fileName, String title) {
-    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-        //to process each line in the file
-        String line;
-        boolean found = false;
+    void searchFood(String fileName, String title) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            //to process each line in the file
+            String line;
+            boolean found = false;
 
-        System.out.println("Searching for food item: " + title + "...");
+            System.out.println("Searching for food item: " + title + "...");
 
-        while ((line = reader.readLine()) != null) {
-            if (line.startsWith("Title: ")) {
-                String itemTitle = line.substring(line.indexOf(":") + 2);
-                if (itemTitle.equalsIgnoreCase(title)) {
-                    found = true;
-                    System.out.println("Food found:");
-                    System.out.println(line);
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Title: ")) {
+                    String itemTitle = line.substring(line.indexOf(":") + 2);
+                    if (itemTitle.equalsIgnoreCase(title)) {
+                        found = true;
+                        System.out.println("Food found:");
+                        System.out.println(line);
 
-                    //for loop to print the next two lines after the title
-                    for (int i = 0; i < 2; i++) {
-                        System.out.println(reader.readLine());
+                        //for loop to print the next two lines after the title
+                        for (int i = 0; i < 2; i++) {
+                            System.out.println(reader.readLine());
+                        }
+                        break;
                     }
-                    break;
                 }
             }
+            if (!found) {
+                System.out.println("Food not found.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while searching for the food item.");
+            System.out.println("Error: " + e);
         }
-        if (!found) {
-            System.out.println("Food not found.");
-        }
-    } catch (IOException e) {
-        System.out.println("An error occurred while searching for the food item.");
-        System.out.println("Error: " + e);
     }
-}
 
     //method to delete food item from the menu (manhah)
     void deleteFood(String title, String fileName) {
