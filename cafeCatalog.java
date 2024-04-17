@@ -39,6 +39,7 @@ class admin{
     admin(){
         this.head = null;
         this.foodCount = 0;
+        //limit of upto a 100 requests
         this.requests = new String[100];
         this.next = 0;
     }
