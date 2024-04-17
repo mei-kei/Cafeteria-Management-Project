@@ -1,10 +1,11 @@
 /*
- * Course: Computer Science II, 201
+ * Course: Computer Science II
+ * Section: 201
  * Assignment: PMU Cafeteria Facilities for Faculty and Students 
- * Student Names: Furat Al Omran - 20221054
-                  Manhah Iftikhar - 202100796
-                  Maryam Alsaif - 202101179
-                  Munira Altheeb - 202200822
+ * Student Names & IDs: Furat Al Omran - 20221054
+                        Manhah Iftikhar - 202100796
+                        Maryam Alsaif - 202101179
+                        Munira Altheeb - 202200822
  */
 import java.util.Scanner;
 import java.io.File;
@@ -43,7 +44,7 @@ class admin{
     }
 
     //method to save the added/deleted food by the admin into a text file
-    void addToFile(String fileName) {
+    void writeToFile(String fileName) {
         try {
             File file = new File(fileName);
             if(!file.exists()){
@@ -62,12 +63,11 @@ class admin{
                 }
             }
 
-            ///initialising added item
-            int itemNumber = 1;
-
             FileWriter writer = new FileWriter(fileName);
+            ///initialising added item
+            int itemNumber = 1;           
             Food temp = head;
-
+            
             while (temp != null) {
                 writer.write("\nItem #" + itemNumber + "\n");
                 writer.write("-------------------------\n");
@@ -79,7 +79,7 @@ class admin{
                 //incrementing after the addition of more food items
                 itemNumber++;
             }
-
+            
             writer.close();
 
         } catch(IOException e){
@@ -103,8 +103,8 @@ class admin{
 
     //help method for addFood() to write the new food item into the text file
     void addItemToFile(String title, String country, String info, String fileName){
-        //creating an object and writing new food item(s) into the file
-        try(FileWriter writer = new FileWriter(fileName)){
+        //creating an object and writing new food item(s) into the file without overriding
+        try(FileWriter writer = new FileWriter(fileName, true)){
             writer.write("\nItem #" + foodCount + "\n");
             writer.write("-------------------------\n");
             writer.write("Title: " + title + "\n");
@@ -118,54 +118,57 @@ class admin{
     
     //method to inquire about the specific food including the information
     void inquireFood(String fileName) {
-        try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             Scanner input = new Scanner(System.in);
 
             //to process each line in the file
             String line;
             boolean found = false;
 
-            System.out.println("Enter the title of the food to inquire about: ");
+            System.out.print("Enter the title of the food to inquire about: ");
             String searchTitle = input.nextLine();
 
-            while((line = reader.readLine()) != null){
-                if(line.startsWith("Title: ")){
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Title:")) {
                     String title = line.substring("Title: ".length());
-                    if(title.equalsIgnoreCase(searchTitle)){
+                    if (title.equalsIgnoreCase(searchTitle)) {
+
+                        //once the food is found, print its info
                         found = true;
 
-                        System.out.println("Food found: ");
-                        System.out.printlin("Title: " + title);
+                        System.out.println("\nFood found");
+                        System.out.println("-------------");
+                        System.out.println("Title: " + title);
 
                         //reading the rest of the lines i.e. country of origin and info and prints them
                         for (int i = 0; i < 2; i++) {
                             line = reader.readLine();
                             System.out.println(line);
                         }
+                        System.out.println("-------------");
                         break;
                     }
                 }
-                line = reader.readLine();
             }
-            
-            if(!found){
+            if (!found) {
                 System.out.println("Food not found.");
             }
-        } catch(IOException e){
-            System.out.println("An error has occurred while reading the file menu.")
+        } catch (IOException e) {
+            System.out.println("An error has occurred while reading the menu file.");
             System.out.println("Error: " + e);
         }
     }
 
+
      //method to request for a new food item
      void requestFood(Scanner input, String fileName){
-        try(FileWriter writer = new FileWriter(fileName, true)){
-            System.out.println(" Enter the title of food you want to request");
+        try(FileWriter writer = new FileWriter(fileName)){
+            System.out.println("Enter the title of the food you want to request: ");
             String title =input.next();
-            System.out.println(" Enter the food's country of origin: ");
+            System.out.println("Enter the country of origin: ");
             String country = input.next();
             input.nextLine(); // Consume newline
-            System.out.println(" Enter the food's info: ");
+            System.out.println("Enter additional info: ");
             String info = input.nextLine();
             
             writer.write("\nRequested Food\n");
@@ -174,7 +177,11 @@ class admin{
             writer.write("Country of Origin: " + country + "\n");
             writer.write("Info: " + info + "\n");
 
-            System.out.println("Your request for Title: " + title + "\nCountry of Origin: " + country + "\nInfo: " + info + " has been registered.");        
+            System.out.println("Your request for... " + "\n-------------"
+                    + "\nTitle: " + title + 
+                    "\nCountry of Origin: " + country + "\nInfo: " + info + 
+                    "\n-------------" + " \nhas been registered.");      
+            System.out.println();
         } catch(IOException e){
             System.out.println("An error occurred while adding your request to the file.");
             System.out.println("Error: " + e);
@@ -191,8 +198,10 @@ class admin{
                 return;
             }
 
+            input.nextLine();
             System.out.println("Enter the title of the food item: ");
             String foodItem = input.nextLine();
+            input.nextLine();
             System.out.println("Enter the new request or requirement: ");
             String newRequest = input.nextLine();
 
@@ -238,11 +247,13 @@ class admin{
     }
     
     void foodComplaint(Scanner input, String title, String fileName){
+        input.nextLine();
         System.out.println("Enter your complaint about the non-availability of '" + title + "': ");
         String complaint = input.nextLine();
 
         try(FileWriter writer = new FileWriter(fileName, true)){
-            writer.write("\nComplaint for: " + title + "\n");
+            writer.write("\n----------------------------");
+            writer.write("\nTitle: " + title + "\n");
             writer.write("Complaint: " + complaint + "\n");
             writer.write("------------------------------\n");
             
@@ -268,7 +279,8 @@ class admin{
                     String itemTitle = line.substring(line.indexOf(":") + 2);
                     if (itemTitle.equalsIgnoreCase(title)) {
                         found = true;
-                        System.out.println("Food found:");
+                        System.out.println("\nFood found:");
+                        System.out.println("-------------\n");
                         System.out.println(line);
 
                         //for loop to print the next two lines after the title
@@ -280,7 +292,7 @@ class admin{
                 }
             }
             if (!found) {
-                System.out.println("Food not found.");
+            System.out.println("Food not found.");
             }
         } catch (IOException e) {
             System.out.println("An error occurred while searching for the food item.");
@@ -294,7 +306,7 @@ class admin{
         boolean deleted = false;
     
         //checking if the menu is empty or not
-        if (head == null) {
+        if (head == null || foodCount == 0) {
             System.out.println("There are currently no food items in the menu.\n");
             return;
         }
@@ -332,7 +344,7 @@ class admin{
 
     //method to update the text file after the deletion of a food item
     void updateMenuFile(String fileName) {
-        addToFile(fileName);
+        writeToFile(fileName);
     }
 
     //method to check the number of food varieties (furat)
@@ -340,9 +352,10 @@ class admin{
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             //to process each line in the file
             String line;
+            Food temp = head;
             int count = 0;
             
-            System.out.println("Displaying food varieties...");
+            System.out.println("Displaying food varieties...\n");
             while((line = reader.readLine()) != null){
                 if(line.startsWith("Title: ")){
 
@@ -356,6 +369,7 @@ class admin{
                     System.out.println("Info: " + info + "\n");
 
                     count++;
+                    temp = temp.next;
                 }
             }
             return count;
@@ -400,10 +414,13 @@ class admin{
             break;
 
             case "country":
+            System.out.println("Title: " + food.title);
             System.out.println("Country of Origin: " + food.countryOfOrigin);
             break;
 
             case "info":
+            System.out.println("Title: " + food.title);
+            System.out.println("Country of Origin: " + food.countryOfOrigin);
             System.out.println("Info: " + food.info);
             break;
 
@@ -429,28 +446,63 @@ class user extends admin{
 
     //implementing the same method to file a complaint if any for the user
     void foodComplaint(Scanner input){
-        System.out.println("Enter your complaint about the non-availability of the food: ");
+        System.out.println("Enter the title of the unavailable food item: ");
         String complaint = input.nextLine();
 
         System.out.println("Your complaint has been registered successfully.");
     }
 
     //implementing the same method to search for existing food items on the menu
-    @Override
-    Food searchFood(String title) {
-        Food result = super.searchFood(title);
-        if (result == null) {
-            System.out.println("Food not found. Please ask the admin for assistance.");
+    protected Food searchFood(String title) {
+        Food current = head;
+        while (current != null) {
+            if (current.title.equals(title)){
+                System.out.println("Title: " + current.title);
+                System.out.println("Country of Origin: " + current.countryOfOrigin);
+                System.out.println("Info: " + current.info + "\n");
+                
+                //return food item that's found
+                return current;
+            }
+            current = current.next;
         }
-        return result;
+        System.out.println(title + " not found.\n");
+        
+        //if no food item is found
+        return null;
     }
+
 
     //implementing the same method to check for existing food varieties on the menu
     @Override
     public int checkFood(String fileName) {
-        int count = super.checkFood(fileName);
-        System.out.println("You have access to " + count + " food varieties.");
-        return count;
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            int count = 0;
+            System.out.println("Displaying food varieties...");
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Title: ")) {
+                    // Extract and print the food information
+                    String title = line.substring("Title: ".length());
+                    String countryOfOrigin = reader.readLine().substring("Country of Origin: ".length());
+                    String info = reader.readLine().substring("Info: ".length());
+
+                    System.out.println("Title: " + title);
+                    System.out.println("Country of Origin: " + countryOfOrigin);
+                    System.out.println("Info: " + info);
+                    System.out.println();
+
+                    // Increment the count
+                    count++;
+                }
+            }
+            System.out.println("You have access to " + count + " food varieties.");
+            return count;
+        } catch (IOException e) {
+            System.out.println("An error occurred while checking the food items on the menu.");
+            System.out.println("Error: " + e);
+            return 0;
+        }
     }
 }
 
@@ -464,14 +516,16 @@ public class cafeCatalog {
             System.out.println("Enter the file name to create or use for storing the menu: ");
             String filename = input.nextLine();
 
-            adminMenu.addToFile(filename);
-            studentMenu.addToFile(filename);
+            adminMenu.writeToFile(filename);
+            studentMenu.writeToFile(filename);
 
             while (true) {
+                System.out.println("\n------------------------");
                 System.out.println("Please select the user: ");
                 System.out.println("1. Administrator");
                 System.out.println("2. Student");
                 System.out.println("3. Exit");
+                System.out.println();
                 
                 int choice = input.nextInt();
                 
@@ -479,6 +533,7 @@ public class cafeCatalog {
                 switch (choice) {
                     //if user choice was 1. Admin
                     case 1:
+                        System.out.println("\n-------------------");
                         System.out.println("Administrator Menu:");
                         System.out.println("a. Add new food");
                         System.out.println("b. Inquire regarding a food item");
@@ -526,7 +581,7 @@ public class cafeCatalog {
 
                             //calling the foodComplaint method
                             case "e":
-                            System.out.println("Enter the title of the food to complain about: ");
+                            System.out.println("Enter the title of the food you would like to add: ");
                             String titleToComplain = input.next();
                             adminMenu.foodComplaint(input, titleToComplain, filename);
                             break;
@@ -578,7 +633,7 @@ public class cafeCatalog {
                         System.out.println("b. Request for a new variety of food");
                         System.out.println("c. Raise a complaint about the non-availability of a food");
                         System.out.println("d. Search food on the menu");
-                        System.out.println("e. Check the number of food varieties")
+                        System.out.println("e. Check the number of food varieties");
                         System.out.println("f. Exit Student Menu");
                         System.out.println();
         
@@ -607,7 +662,6 @@ public class cafeCatalog {
                             System.out.println("\nEnter food title to search: ");
                             String searchTitle = input.next();
                             studentMenu.searchFood(searchTitle);
-                            break;
                             break;
 
                             //calling the checkFood method
